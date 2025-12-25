@@ -27,4 +27,4 @@ jobs:
           MONGO_URI: ${{ secrets.MONGO_URI }} 
         run: |
           python crawl_vietnamworks.py
-          python crawl_topcv.py
+          python crawl_joboko.py
