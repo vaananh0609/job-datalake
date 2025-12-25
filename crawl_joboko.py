@@ -198,7 +198,7 @@ async def crawl_joboko():
     # 1. Kết nối DB
     try:
         db = get_database()
-        collection = db["raw_joboko"]
+        collection = db["raw_joboko_test"]
     except Exception as e:
         print(f"❌ Lỗi kết nối Database: {e}")
         return
