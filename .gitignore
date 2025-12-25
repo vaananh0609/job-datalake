@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+.env
+browser_profile/
+venv/
+.vscode/
+.idea/

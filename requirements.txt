@@ -1,0 +1,5 @@
+pymongo
+requests
+minio
+playwright
+oci

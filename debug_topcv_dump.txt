@@ -1,0 +1,2049 @@
+🧪 DEBUG TOPCV – DUMP ALL FIELDS OF 1 JOB
+🌍 JOB URL: https://www.topcv.vn/viec-lam/data-analyst/1980421.html
+================================================================================
+
+[1] OPEN JOB PAGE
+
+================================================================================
+📦 JSON EMBEDDED (LD+JSON)
+================================================================================
+
+--- JSON #1 ---
+{
+  "@context": "http://schema.org/",
+  "@type": "JobPosting",
+  "title": "Senior Back-End Developer (NodeJS)",
+  "description": "<h2>Mô tả công việc</h2>\n<ul style=\"list-style-type:disc;\"><li>Participating in global software development projects (Ecommerce, airline,..)&nbsp;</li><li>Be active in self-research and sharing solutions for complicated technical problem&nbsp;</li><li>Carrying out assigned tasks to meet all deadlines and delivered with quality results.</li><li>Contributing in designing &amp; implement features to meet customer’s requirements &amp; deadlines.</li><li>Working directly with clients to resolve ambiguities, finalize requirements and ensure technical deliverables meet business expectations</li></ul>\n<h2>Yêu cầu ứng viên</h2>\n<ul style=\"list-style-type:disc;\"><li>Experience with NodeJS, JavaScript, TypeScript</li><li>3+ year experience with NodeJS backend development</li><li>Experienced at least 1 project with NestJS</li><li>Experience with cloud computing (AWS services, Google services)</li><li>Knowledge of web services integrations (REST/SOAP)</li><li>Good at <strong>English communication skills (must have)</strong></li><li>Excellent in object-oriented programing knowledge and experience.</li><li>Understanding on Design Patterns&nbsp;</li></ul><p>Having the following skills is an advantage:</p><ul style=\"list-style-type:disc;\"><li>Experienced with integrating with other systems, such as CRM, ERP, Payment Gateways... is a bonus point</li><li>Experience with CI/CD and deploying applications to AWS Cloud</li><li>Experience with website performance optimization</li><li>Familiar with Agile model, having knowledge with TDD/BDD applied in Agile is a plus</li></ul>\n<h2>Quyền lợi được hưởng</h2>\n<ul><li>Attractive salary package, up to 45M gross</li><li>Salary review twice a year</li><li>Flexible working hour (between 7:30am – 7:30pm on staff’s preference)</li><li>Premium health care up to $6,000/year</li><li>Working in One of the largest Ecommerce Agencies in South East Asia&nbsp; – Professional English environment</li><li>Free English, Japanese and professional training packages</li><li>Firm’s Certified Qualifications Sponsorship for career development</li><li>Annual company trip inside or outside Vietnam</li><li>Other fun activities: happy hour, quarterly team building, football club, yoga club, swimming club, charity activities, etc.</li><li>Free entertainment parties: Birthday party, Anniversary party, Sum-up Party, Year-End Party, etc. &nbsp;</li></ul>",
+  "identifier": {
+    "@type": "PropertyValue",
+    "name": "CÔNG TY CỔ PHẦN SMARTOSC",
+    "value": 84788
+  },
+  "datePosted": "2025-12-10",
+  "validThrough": "2026-01-09T23:59:59+07:00",
+  "employmentType": "FULL_TIME",
+  "hiringOrganization": {
+    "@type": "Organization",
+    "name": "CÔNG TY CỔ PHẦN SMARTOSC",
+    "sameAs": "https://www.topcv.vn/cong-ty/cong-ty-co-phan-smartosc/84788.html",
+    "logo": "https://cdn-new.topcv.vn/unsafe/https://static.topcv.vn/company_logos/cong-ty-co-phan-smartosc-61d50e76c4aec.jpg"
+  },
+  "jobLocation": {
+    "@type": "Place",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Handico Tower, Phạm Hùng",
+      "addressLocality": "Phường Từ Liêm",
+      "addressRegion": "Hà Nội",
+      "postalCode": 100000,
+      "addressCountry": "VN"
+    }
+  },
+  "baseSalary": {
+    "@type": "MonetaryAmount",
+    "currency": "VND",
+    "value": {
+      "@type": "QuantitativeValue",
+      "unitText": "MONTH",
+      "minValue": 28000000,
+      "maxValue": 45000000
+    }
+  },
+  "industry": "IT phần mềm, Công nghệ thông tin",
+  "jobBenefits": "<ul><li>Attractive salary package, up to 45M gross</li><li>Salary review twice a year</li><li>Flexible working hour (between 7:30am – 7:30pm on staff’s preference)</li><li>Premium health care up to $6,000/year</li><li>Working in One of the largest Ecommerce Agencies in South East Asia&nbsp; – Professional English environment</li><li>Free English, Japanese and professional training packages</li><li>Firm’s Certified Qualifications Sponsorship for career development</li><li>Annual company trip inside or outside Vietnam</li><li>Other fun activities: happy hour, quarterly team building, football club, yoga club, swimming club, charity activities, etc.</li><li>Free entertainment parties: Birthday party, Anniversary party, Sum-up Party, Year-End Party, etc. &nbsp;</li></ul>",
+  "employerOverview": "<ul style=\"list-style-type:disc;\"><li>Participating in global software development projects (Ecommerce, airline,..)&nbsp;</li><li>Be active in self-research and sharing solutions for complicated technical problem&nbsp;</li><li>Carrying out assigned tasks to meet all deadlines and delivered with quality results.</li><li>Contributing in designing &amp; implement features to meet customer’s requirements &amp; deadlines.</li><li>Working directly with clients to resolve ambiguities, finalize requirements and ensure technical deliverables meet business expectations</li></ul>",
+  "occupationalCategory": "Nhân viên",
+  "experienceRequirements": {
+    "@type": "OccupationalExperienceRequirements",
+    "monthsOfExperience": 36
+  },
+  "totalJobOpenings": 3
+}
+
+================================================================================
+🧩 DOM FIELD DUMP (POSSIBLE JOB FIELDS)
+================================================================================
+[
+  {
+    "tag": "DIV",
+    "id": "saved-job-tooltip",
+    "class": "",
+    "text": "Lưu tin thành công!\n    \n        Để xem\n        Danh sách việc làm đã lưu,\n        click vào đây!"
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "saved-job-tooltip__title",
+    "text": "Lưu tin thành công!"
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "link-saved-job",
+    "text": "Để xem\n        Danh sách việc làm đã lưu,\n        click vào đây!"
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "save-job-helper__tooltip-hover",
+    "text": "Danh sách việc làm đã lưu"
+  },
+  {
+    "tag": "P",
+    "id": "",
+    "class": "anti-scam-popup__description",
+    "text": "Chống lừa đảo 2025"
+  },
+  {
+    "tag": "P",
+    "id": "",
+    "class": "anti-scam-popup__description",
+    "text": "TopCV nỗ lực phòng chống lừa đảo"
+  },
+  {
+    "tag": "P",
+    "id": "",
+    "class": "anti-scam-popup__description",
+    "text": "TopCV \"bắt tay\" phòng chống lừa đảo với Chuyên gia an ninh mạng Hiếu PC"
+  },
+  {
+    "tag": "P",
+    "id": "",
+    "class": "anti-scam-popup__description",
+    "text": "Ứng tuyển an toàn cùng TopCV"
+  },
+  {
+    "tag": "P",
+    "id": "",
+    "class": "anti-scam-popup__description",
+    "text": "TopCV cảnh báo NTD & Tin đăng có dấu hiệu bất thường"
+  },
+  {
+    "tag": "P",
+    "id": "",
+    "class": "anti-scam-popup__description",
+    "text": "Xem thêm"
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "box-benefit",
+    "text": "Lợi ích dành cho bạn\n                    \n\n                    \n                        \n                            \n                                \n                            \n                            \n                                Không cần rải CV, Cơ hội giá trị tự tìm đến\n                            \n                        \n                        \n                            \n                                \n                            \n                            \n                "
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "box-benefit_title",
+    "text": "Lợi ích dành cho bạn"
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "list-benefit",
+    "text": "Không cần rải CV, Cơ hội giá trị tự tìm đến\n                            \n                        \n                        \n                            \n                                \n                            \n                            \n                                Tự do lựa chọn Nhà tuyển dụng bạn thấy phù hợp"
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "list-benefit_item",
+    "text": "Không cần rải CV, Cơ hội giá trị tự tìm đến"
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "list-benefit_item-content",
+    "text": "Không cần rải CV, Cơ hội giá trị tự tìm đến"
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "list-benefit_item",
+    "text": "Tự do lựa chọn Nhà tuyển dụng bạn thấy phù hợp"
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "list-benefit_item-content",
+    "text": "Tự do lựa chọn Nhà tuyển dụng bạn thấy phù hợp"
+  },
+  {
+    "tag": "DIV",
+    "id": "tab-require-to-be-supported",
+    "class": "support-ticket-tab",
+    "text": "Yêu cầu hỗ trợ"
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "support-ticket-tab-content__description",
+    "text": "Phản hồi của bạn rất quan trọng, TopCV mong nhận được nhiều góp ý từ bạn để cải thiện sản phẩm tốt hơn."
+  },
+  {
+    "tag": "FORM",
+    "id": "tab-require-to-be-supported-content",
+    "class": "support-ticket-tab-content",
+    "text": "Vui lòng đăng nhập để gửi yêu cầu hỗ trợ khi gặp lỗi hoặc khó khăn trong quá trình sử dụng sản phẩm.\n                        \n                        Đăng nhập ngay"
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "support-ticket-success-description",
+    "text": "Gửi yêu cầu thành công\n            \n            \n                TopCV sẽ gửi phản hồi tới email bạn nhập trong vòng 24 giờ (không kể Thứ 7, Chủ nhật, ngày lễ)\n            \n            \n                Trường hợp bạn chưa nhận được phản hồi, vui lòng liên hệ qua:\n            \n            \n                Hotline: (024) 7107 6480 (Giờ hành chính)\n            \n            \n                Email: hotro@topcv.vn\n            \n            \n                Đóng"
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "support-ticket-success-description__title",
+    "text": "Gửi yêu cầu thành công"
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "support-ticket-success-description__text",
+    "text": "TopCV sẽ gửi phản hồi tới email bạn nhập trong vòng 24 giờ (không kể Thứ 7, Chủ nhật, ngày lễ)"
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "support-ticket-success-description__text",
+    "text": "Trường hợp bạn chưa nhận được phản hồi, vui lòng liên hệ qua:"
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "support-ticket-success-description__text",
+    "text": "Hotline: (024) 7107 6480 (Giờ hành chính)"
+  },
+  {
+    "tag": "SPAN",
+    "id": "",
+    "class": "description-highlight",
+    "text": "(024) 7107 6480 (Giờ hành chính)"
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "support-ticket-success-description__text",
+    "text": "Email: hotro@topcv.vn"
+  },
+  {
+    "tag": "SPAN",
+    "id": "",
+    "class": "description-highlight",
+    "text": "hotro@topcv.vn"
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "support-ticket-success-description",
+    "text": "Gửi góp ý thành công\n            \n            \n                Cảm ơn bạn đã gửi góp ý! Chúng tôi sẽ nghiêm túc lắng nghe, tiếp thu để cải thiện sản phẩm tốt hơn.\n            \n            \n                Đóng"
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "support-ticket-success-description__title",
+    "text": "Gửi góp ý thành công"
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "support-ticket-success-description__text",
+    "text": "Cảm ơn bạn đã gửi góp ý! Chúng tôi sẽ nghiêm túc lắng nghe, tiếp thu để cải thiện sản phẩm tốt hơn."
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "sub-menu__article-detail-description",
+    "text": "Trước khi chính thức vào làm việc, Người lao động và Doanh nghiệp sẽ cùng nhau thực hiện ký kết hợp đồng lao động, bao gồm hình thức trả lương và các phúc lợi cơ bản. Lúc này, nhiều người lao động có sự thắc mắc về vấn đề lương Net là gì. Người lao động có thiệt thòi khi nhận lương Net? Cách tính lương Net chính xác hiện nay? Hay các khoản phí mà người lao động phải đóng khi nhận mức lương Net là gì? Hãy tham khảo bài viết chi tiết dưới đây của TopCV.Lưu ý: Thông tin về biểu thuế thu nhập cá nhâ"
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "sub-menu__article-detail-description",
+    "text": "Các ứng viên kế toán cần chuẩn bị những kiến thức và chuyên môn nghiệp vụ gì để tham gia buổi phỏng vấn được thuận lợi? Bạn hãy cùng TopCV tham khảo ngay 50 câu hỏi phỏng vấn kế toán theo nghiệp vụ dưới đây nhé!"
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "navigation-left__item sub-menu-job-search\n                 active ",
+    "text": "Việc làm"
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "navigation-left__item-sub-menu sub-menu-job-search",
+    "text": "VIỆC LÀM\nTìm việc làm\nViệc làm đã lưu\nViệc làm đã ứng tuyển\nViệc làm phù hợp\nCÔNG TY\nDanh sách công ty\nTop công ty\nVIỆC LÀM THEO VỊ TRÍ\nViệc làm Nhân viên kinh doanh\nViệc làm Kế toán\nViệc làm Marketing\nViệc làm Hành chính nhân sự\nViêc làm Chăm sóc khách hàng\nViệc làm Ngân hàng\nViệc làm IT\nViệc làm Lao động phổ thông\nViệc làm Senior\nViệc làm Kỹ sư xây dựng\nViệc làm Thiết kế đồ hoạ\nViệc làm Bất động sản\nViệc làm Giáo dục\nViệc làm telesales"
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "sub-menu__article-detail-description",
+    "text": "Trước khi chính thức vào làm việc, Người lao động và Doanh nghiệp sẽ cùng nhau thực hiện ký kết hợp đồng lao động, bao gồm hình thức trả lương và các phúc lợi cơ bản. Lúc này, nhiều người lao động có sự thắc mắc về vấn đề lương Net là gì. Người lao động có thiệt thòi khi nhận lương Net? Cách tính lương Net chính xác hiện nay? Hay các khoản phí mà người lao động phải đóng khi nhận mức lương Net là gì? Hãy tham khảo bài viết chi tiết dưới đây của TopCV.Lưu ý: Thông tin về biểu thuế thu nhập cá nhâ"
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "sub-menu__article-detail-description",
+    "text": "Các ứng viên kế toán cần chuẩn bị những kiến thức và chuyên môn nghiệp vụ gì để tham gia buổi phỏng vấn được thuận lợi? Bạn hãy cùng TopCV tham khảo ngay 50 câu hỏi phỏng vấn kế toán theo nghiệp vụ dưới đây nhé!"
+  },
+  {
+    "tag": "LI",
+    "id": "",
+    "class": "navbar-right__item post-job",
+    "text": "Đăng tuyển & tìm hồ sơ"
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "search-job",
+    "text": "Danh mục Nghề\nĐịa điểm\nTìm kiếm"
+  },
+  {
+    "tag": "DIV",
+    "id": "job-detail-simple-search",
+    "class": "header",
+    "text": "Danh mục Nghề\nĐịa điểm\nTìm kiếm"
+  },
+  {
+    "tag": "DIV",
+    "id": "box-option-search-job",
+    "class": "box-search-job",
+    "text": "Danh mục Nghề\nĐịa điểm\nTìm kiếm"
+  },
+  {
+    "tag": "FORM",
+    "id": "frm-search-job",
+    "class": "",
+    "text": "Danh mục Nghề\nĐịa điểm\nTìm kiếm"
+  },
+  {
+    "tag": "DIV",
+    "id": "category-filter-desktop-container-box-search-page-job",
+    "class": "category-filter-desktop-container",
+    "text": "Danh mục Nghề"
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "item search-city frm-box-location",
+    "text": "Địa điểm"
+  },
+  {
+    "tag": "DIV",
+    "id": "location-selection-desktop-job-listing-box-search-job",
+    "class": "location-selection-desktop",
+    "text": "Địa điểm"
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "select-multi-location",
+    "text": "Địa điểm"
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "select-multi-location__content",
+    "text": "Địa điểm"
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "select-multi-location__content-default",
+    "text": "Địa điểm"
+  },
+  {
+    "tag": "BUTTON",
+    "id": "",
+    "class": "btn btn-topcv btn-search-job",
+    "text": "Tìm kiếm"
+  },
+  {
+    "tag": "DIV",
+    "id": "job-detail-fixed-menu",
+    "class": "job-detail-fixed-menu",
+    "text": "Chi tiết tin tuyển dụng\n                \n                \n                    Việc làm liên quan\n                \n            \n            \n                                                            \n                            \n                                \n                            \n                            Ứng tuyển ngay"
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "job-detail-fixed-menu__left",
+    "text": "Chi tiết tin tuyển dụng\n                \n                \n                    Việc làm liên quan\n                \n            \n            \n                                                            \n                            \n                                \n                            \n                            Ứng tuyển ngay"
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "job-detail-fixed-menu__tabs",
+    "text": "Chi tiết tin tuyển dụng\n                \n                \n                    Việc làm liên quan"
+  },
+  {
+    "tag": "DIV",
+    "id": "fixed-menu-tab-job-info",
+    "class": "job-detail-fixed-menu__tabs--item",
+    "text": "Chi tiết tin tuyển dụng"
+  },
+  {
+    "tag": "DIV",
+    "id": "fixed-menu-tab-job-similar",
+    "class": "job-detail-fixed-menu__tabs--item",
+    "text": "Việc làm liên quan"
+  },
+  {
+    "tag": "DIV",
+    "id": "job-detail-fixed-menu-actions",
+    "class": "job-detail-fixed-menu__actions",
+    "text": "Ứng tuyển ngay"
+  },
+  {
+    "tag": "A",
+    "id": "",
+    "class": "job-detail-fixed-menu__actions--button",
+    "text": "Ứng tuyển ngay"
+  },
+  {
+    "tag": "DIV",
+    "id": "job-detail",
+    "class": "container job-detail",
+    "text": "Trang chủ\nViệc làm IT\nTìm việc làm Back-End Developer\nTuyển Senior Back-End Developer (NodeJS)\nSenior Back-End Developer (NodeJS) \nMức lương\n28 - 45 triệu\nĐịa điểm\nHà Nội\nKinh nghiệm\n3 năm\nXem số người đã ứng tuyển\nNew\nHạn nộp hồ sơ:\n09/01/2026\n(\nCòn 15 ngày\n)\nỨng tuyển ngay\nLưu tin\nChi tiết tin tuyển dụng\nGửi tôi việc làm tương tự\nYêu cầu:\n3 năm kinh nghiệm\nĐại Học trở lên\nTiếng Anh Giao tiếp thành thạo\nTiếng Anh IELTS 6.5\nXem thêm\nQuyền lợi:\nNghỉ thứ 7\nBảo hiểm sức khỏe\nBảo hiểm xã hội\nXem thê"
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "job-detail__wrapper",
+    "text": "Senior Back-End Developer (NodeJS) \nMức lương\n28 - 45 triệu\nĐịa điểm\nHà Nội\nKinh nghiệm\n3 năm\nXem số người đã ứng tuyển\nNew\nHạn nộp hồ sơ:\n09/01/2026\n(\nCòn 15 ngày\n)\nỨng tuyển ngay\nLưu tin\nChi tiết tin tuyển dụng\nGửi tôi việc làm tương tự\nYêu cầu:\n3 năm kinh nghiệm\nĐại Học trở lên\nTiếng Anh Giao tiếp thành thạo\nTiếng Anh IELTS 6.5\nXem thêm\nQuyền lợi:\nNghỉ thứ 7\nBảo hiểm sức khỏe\nBảo hiểm xã hội\nXem thêm\nChuyên môn:\nSoftware Engineer\nIT - Phần mềm\nMô tả công việc\nParticipating in global software "
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "job-detail__body",
+    "text": "Senior Back-End Developer (NodeJS) \nMức lương\n28 - 45 triệu\nĐịa điểm\nHà Nội\nKinh nghiệm\n3 năm\nXem số người đã ứng tuyển\nNew\nHạn nộp hồ sơ:\n09/01/2026\n(\nCòn 15 ngày\n)\nỨng tuyển ngay\nLưu tin\nChi tiết tin tuyển dụng\nGửi tôi việc làm tương tự\nYêu cầu:\n3 năm kinh nghiệm\nĐại Học trở lên\nTiếng Anh Giao tiếp thành thạo\nTiếng Anh IELTS 6.5\nXem thêm\nQuyền lợi:\nNghỉ thứ 7\nBảo hiểm sức khỏe\nBảo hiểm xã hội\nXem thêm\nChuyên môn:\nSoftware Engineer\nIT - Phần mềm\nMô tả công việc\nParticipating in global software "
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "job-detail__body-left",
+    "text": "Senior Back-End Developer (NodeJS) \nMức lương\n28 - 45 triệu\nĐịa điểm\nHà Nội\nKinh nghiệm\n3 năm\nXem số người đã ứng tuyển\nNew\nHạn nộp hồ sơ:\n09/01/2026\n(\nCòn 15 ngày\n)\nỨng tuyển ngay\nLưu tin\nChi tiết tin tuyển dụng\nGửi tôi việc làm tương tự\nYêu cầu:\n3 năm kinh nghiệm\nĐại Học trở lên\nTiếng Anh Giao tiếp thành thạo\nTiếng Anh IELTS 6.5\nXem thêm\nQuyền lợi:\nNghỉ thứ 7\nBảo hiểm sức khỏe\nBảo hiểm xã hội\nXem thêm\nChuyên môn:\nSoftware Engineer\nIT - Phần mềm\nMô tả công việc\nParticipating in global software "
+  },
+  {
+    "tag": "DIV",
+    "id": "header-job-info",
+    "class": "job-detail__box--left job-detail__info",
+    "text": "Senior Back-End Developer (NodeJS) \nMức lương\n28 - 45 triệu\nĐịa điểm\nHà Nội\nKinh nghiệm\n3 năm\nXem số người đã ứng tuyển\nNew\nHạn nộp hồ sơ:\n09/01/2026\n(\nCòn 15 ngày\n)\nỨng tuyển ngay\nLưu tin"
+  },
+  {
+    "tag": "H1",
+    "id": "",
+    "class": "job-detail__info--title ",
+    "text": "Senior Back-End Developer (NodeJS)"
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "job-detail__info--sections",
+    "text": "Mức lương\n28 - 45 triệu\nĐịa điểm\nHà Nội\nKinh nghiệm\n3 năm"
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "job-detail__info--section section-salary",
+    "text": "Mức lương\n28 - 45 triệu"
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "job-detail__info--section-content",
+    "text": "Mức lương\n28 - 45 triệu"
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "job-detail__info--section-content-title",
+    "text": "Mức lương"
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "job-detail__info--section-content-value",
+    "text": "28 - 45 triệu"
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "job-detail__info--section section-location",
+    "text": "Địa điểm\nHà Nội"
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "job-detail__info--section-content",
+    "text": "Địa điểm\nHà Nội"
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "job-detail__info--section-content-title",
+    "text": "Địa điểm"
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "job-detail__info--section-content-value",
+    "text": "Hà Nội"
+  },
+  {
+    "tag": "DIV",
+    "id": "job-detail-info-experience",
+    "class": "job-detail__info--section section-experience",
+    "text": "Kinh nghiệm\n3 năm"
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "job-detail__info--section-content",
+    "text": "Kinh nghiệm\n3 năm"
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "job-detail__info--section-content-title",
+    "text": "Kinh nghiệm"
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "job-detail__info--section-content-value",
+    "text": "3 năm"
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "job-detail__info--flex",
+    "text": "Xem số người đã ứng tuyển\nNew\nHạn nộp hồ sơ:\n09/01/2026\n(\nCòn 15 ngày\n)"
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "job-detail__info--deadline",
+    "text": "Hạn nộp hồ sơ:\n09/01/2026\n(\nCòn 15 ngày\n)"
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "job-detail__info--deadline-date",
+    "text": "09/01/2026"
+  },
+  {
+    "tag": "SPAN",
+    "id": "",
+    "class": "job-detail__info--deadline-convert",
+    "text": "(\nCòn 15 ngày\n)"
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "job-detail__info--actions box-apply-current",
+    "text": "Ứng tuyển ngay\nLưu tin"
+  },
+  {
+    "tag": "A",
+    "id": "",
+    "class": "job-detail__info--actions-button button-primary btn-apply-job",
+    "text": "Ứng tuyển ngay"
+  },
+  {
+    "tag": "A",
+    "id": "",
+    "class": "job-detail__info--actions-button button-white",
+    "text": "Lưu tin"
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "job-detail__info--actions box-apply-success",
+    "text": "Ứng tuyển lại\n\n\n    \n        \n    \n    Nhắn tin"
+  },
+  {
+    "tag": "A",
+    "id": "",
+    "class": "job-detail__info--actions-button button-primary open-apply-modal",
+    "text": "Ứng tuyển lại"
+  },
+  {
+    "tag": "A",
+    "id": "",
+    "class": "job-detail__info--actions-button button-white",
+    "text": "Nhắn tin"
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "job-detail__box--left",
+    "text": "Chi tiết tin tuyển dụng\nGửi tôi việc làm tương tự\nYêu cầu:\n3 năm kinh nghiệm\nĐại Học trở lên\nTiếng Anh Giao tiếp thành thạo\nTiếng Anh IELTS 6.5\nXem thêm\nQuyền lợi:\nNghỉ thứ 7\nBảo hiểm sức khỏe\nBảo hiểm xã hội\nXem thêm\nChuyên môn:\nSoftware Engineer\nIT - Phần mềm\nMô tả công việc\nParticipating in global software development projects (Ecommerce, airline,..)\nBe active in self-research and sharing solutions for complicated technical problem\nCarrying out assigned tasks to meet all deadlines and deliver"
+  },
+  {
+    "tag": "DIV",
+    "id": "box-job-information-detail",
+    "class": "job-detail__information-detail content-preview--collapsed",
+    "text": "Chi tiết tin tuyển dụng\nGửi tôi việc làm tương tự\nYêu cầu:\n3 năm kinh nghiệm\nĐại Học trở lên\nTiếng Anh Giao tiếp thành thạo\nTiếng Anh IELTS 6.5\nXem thêm\nQuyền lợi:\nNghỉ thứ 7\nBảo hiểm sức khỏe\nBảo hiểm xã hội\nXem thêm\nChuyên môn:\nSoftware Engineer\nIT - Phần mềm\nMô tả công việc\nParticipating in global software development projects (Ecommerce, airline,..)\nBe active in self-research and sharing solutions for complicated technical problem\nCarrying out assigned tasks to meet all deadlines and deliver"
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "d-flex justify-content-between align-items-center job-detail__information-detail--title-container",
+    "text": "Chi tiết tin tuyển dụng\nGửi tôi việc làm tương tự"
+  },
+  {
+    "tag": "H2",
+    "id": "",
+    "class": "job-detail__information-detail--title",
+    "text": "Chi tiết tin tuyển dụng"
+  },
+  {
+    "tag": "BUTTON",
+    "id": "",
+    "class": "page-job-detail btn btn-job-notification-setting",
+    "text": "Gửi tôi việc làm tương tự"
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "job-tags",
+    "text": "Yêu cầu:\n3 năm kinh nghiệm\nĐại Học trở lên\nTiếng Anh Giao tiếp thành thạo\nTiếng Anh IELTS 6.5\nXem thêm\nQuyền lợi:\nNghỉ thứ 7\nBảo hiểm sức khỏe\nBảo hiểm xã hội\nXem thêm\nChuyên môn:\nSoftware Engineer\nIT - Phần mềm"
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "job-tags__group",
+    "text": "Yêu cầu:\n3 năm kinh nghiệm\nĐại Học trở lên\nTiếng Anh Giao tiếp thành thạo\nTiếng Anh IELTS 6.5\nXem thêm"
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "job-tags__group-name",
+    "text": "Yêu cầu:"
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "job-tags__group-list-tag",
+    "text": "3 năm kinh nghiệm\nĐại Học trở lên\nTiếng Anh Giao tiếp thành thạo\nTiếng Anh IELTS 6.5\nXem thêm"
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "job-tags__group-list-tag-scroll",
+    "text": "3 năm kinh nghiệm\nĐại Học trở lên\nTiếng Anh Giao tiếp thành thạo\nTiếng Anh IELTS 6.5\nXem thêm"
+  },
+  {
+    "tag": "SPAN",
+    "id": "",
+    "class": "job-tags__group-list-tag-view-more",
+    "text": "Xem thêm"
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "job-tags__group",
+    "text": "Quyền lợi:\nNghỉ thứ 7\nBảo hiểm sức khỏe\nBảo hiểm xã hội\nXem thêm"
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "job-tags__group-name",
+    "text": "Quyền lợi:"
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "job-tags__group-list-tag",
+    "text": "Nghỉ thứ 7\nBảo hiểm sức khỏe\nBảo hiểm xã hội\nXem thêm"
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "job-tags__group-list-tag-scroll",
+    "text": "Nghỉ thứ 7\nBảo hiểm sức khỏe\nBảo hiểm xã hội\nXem thêm"
+  },
+  {
+    "tag": "SPAN",
+    "id": "",
+    "class": "job-tags__group-list-tag-view-more",
+    "text": "Xem thêm"
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "job-tags__group",
+    "text": "Chuyên môn:\nSoftware Engineer\nIT - Phần mềm"
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "job-tags__group-name",
+    "text": "Chuyên môn:"
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "job-tags__group-list-tag",
+    "text": "Software Engineer\nIT - Phần mềm"
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "job-tags__group-list-tag-scroll",
+    "text": "Software Engineer\nIT - Phần mềm"
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "job-detail__information-container",
+    "text": "Mô tả công việc\nParticipating in global software development projects (Ecommerce, airline,..)\nBe active in self-research and sharing solutions for complicated technical problem\nCarrying out assigned tasks to meet all deadlines and delivered with quality results.\nContributing in designing & implement features to meet customer’s requirements & deadlines.\nWorking directly with clients to resolve ambiguities, finalize requirements and ensure technical deliverables meet business expectations\nYêu cầu "
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "job-detail__information-detail--content",
+    "text": "Mô tả công việc\nParticipating in global software development projects (Ecommerce, airline,..)\nBe active in self-research and sharing solutions for complicated technical problem\nCarrying out assigned tasks to meet all deadlines and delivered with quality results.\nContributing in designing & implement features to meet customer’s requirements & deadlines.\nWorking directly with clients to resolve ambiguities, finalize requirements and ensure technical deliverables meet business expectations\nYêu cầu "
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "job-description",
+    "text": "Mô tả công việc\nParticipating in global software development projects (Ecommerce, airline,..)\nBe active in self-research and sharing solutions for complicated technical problem\nCarrying out assigned tasks to meet all deadlines and delivered with quality results.\nContributing in designing & implement features to meet customer’s requirements & deadlines.\nWorking directly with clients to resolve ambiguities, finalize requirements and ensure technical deliverables meet business expectations\nYêu cầu "
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "job-description__item",
+    "text": "Mô tả công việc\nParticipating in global software development projects (Ecommerce, airline,..)\nBe active in self-research and sharing solutions for complicated technical problem\nCarrying out assigned tasks to meet all deadlines and delivered with quality results.\nContributing in designing & implement features to meet customer’s requirements & deadlines.\nWorking directly with clients to resolve ambiguities, finalize requirements and ensure technical deliverables meet business expectations"
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "job-description__item--content",
+    "text": "Participating in global software development projects (Ecommerce, airline,..)\nBe active in self-research and sharing solutions for complicated technical problem\nCarrying out assigned tasks to meet all deadlines and delivered with quality results.\nContributing in designing & implement features to meet customer’s requirements & deadlines.\nWorking directly with clients to resolve ambiguities, finalize requirements and ensure technical deliverables meet business expectations"
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "job-description__item job-detail-section requirement",
+    "text": "Yêu cầu ứng viên\nExperience with NodeJS, JavaScript, TypeScript\n3+ year experience with NodeJS backend development\nExperienced at least 1 project with NestJS\nExperience with cloud computing (AWS services, Google services)\nKnowledge of web services integrations (REST/SOAP)\nGood at English communication skills (must have)\nExcellent in object-oriented programing knowledge and experience.\nUnderstanding on Design Patterns\n\nHaving the following skills is an advantage:\n\nExperienced with integrating wit"
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "job-description__item--content",
+    "text": "Experience with NodeJS, JavaScript, TypeScript\n3+ year experience with NodeJS backend development\nExperienced at least 1 project with NestJS\nExperience with cloud computing (AWS services, Google services)\nKnowledge of web services integrations (REST/SOAP)\nGood at English communication skills (must have)\nExcellent in object-oriented programing knowledge and experience.\nUnderstanding on Design Patterns\n\nHaving the following skills is an advantage:\n\nExperienced with integrating with other systems, "
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "job-description__item job-detail-section benefit",
+    "text": "Quyền lợi\nAttractive salary package, up to 45M gross\nSalary review twice a year\nFlexible working hour (between 7:30am – 7:30pm on staff’s preference)\nPremium health care up to $6,000/year\nWorking in One of the largest Ecommerce Agencies in South East Asia – Professional English environment\nFree English, Japanese and professional training packages\nFirm’s Certified Qualifications Sponsorship for career development\nAnnual company trip inside or outside Vietnam\nOther fun activities: happy hour, quar"
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "job-description__item--content",
+    "text": "Attractive salary package, up to 45M gross\nSalary review twice a year\nFlexible working hour (between 7:30am – 7:30pm on staff’s preference)\nPremium health care up to $6,000/year\nWorking in One of the largest Ecommerce Agencies in South East Asia – Professional English environment\nFree English, Japanese and professional training packages\nFirm’s Certified Qualifications Sponsorship for career development\nAnnual company trip inside or outside Vietnam\nOther fun activities: happy hour, quarterly team"
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "job-description__custom-form-job custom-form-job",
+    "text": "Thiết bị làm việc\nĐược cấp Máy tính, Tai nghe\nQuyền lợi\nBảo hiểm sức khỏe, Bảo hiểm xã hội, Khám sức khỏe định kỳ, Team building, Du lịch hàng năm, Phụ cấp thâm niên, Thưởng hiệu quả làm việc, Signing bonus"
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "custom-form-job__item",
+    "text": "Thiết bị làm việc\nĐược cấp Máy tính, Tai nghe"
+  },
+  {
+    "tag": "H3",
+    "id": "",
+    "class": "custom-form-job__item--title",
+    "text": "Thiết bị làm việc"
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "custom-form-job__item--content",
+    "text": "Được cấp Máy tính, Tai nghe"
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "custom-form-job__item",
+    "text": "Quyền lợi\nBảo hiểm sức khỏe, Bảo hiểm xã hội, Khám sức khỏe định kỳ, Team building, Du lịch hàng năm, Phụ cấp thâm niên, Thưởng hiệu quả làm việc, Signing bonus"
+  },
+  {
+    "tag": "H3",
+    "id": "",
+    "class": "custom-form-job__item--title",
+    "text": "Quyền lợi"
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "custom-form-job__item--content",
+    "text": "Bảo hiểm sức khỏe, Bảo hiểm xã hội, Khám sức khỏe định kỳ, Team building, Du lịch hàng năm, Phụ cấp thâm niên, Thưởng hiệu quả làm việc, Signing bonus"
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "job-description__item",
+    "text": "Địa điểm làm việc (đã được cập nhật theo Danh mục Hành chính mới)\n- Hà Nội: Handico Tower, Phạm Hùng, Phường Từ Liêm"
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "job-description__item--content",
+    "text": "- Hà Nội: Handico Tower, Phạm Hùng, Phường Từ Liêm"
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "job-description__item",
+    "text": "Thời gian làm việc\nThứ 2 - Thứ 6 (từ 09:00 đến 18:15)\nLinh hoạt chấm công"
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "job-description__item--content",
+    "text": "Thứ 2 - Thứ 6 (từ 09:00 đến 18:15)\nLinh hoạt chấm công"
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "job-description__item--content-list",
+    "text": "Thứ 2 - Thứ 6 (từ 09:00 đến 18:15)"
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "job-description__item--content-list",
+    "text": "Linh hoạt chấm công"
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "job-description__item",
+    "text": "Cách thức ứng tuyển\nỨng viên nộp hồ sơ trực tuyến bằng cách bấm Ứng tuyển ngay dưới đây."
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "job-description__item--content",
+    "text": "Ứng viên nộp hồ sơ trực tuyến bằng cách bấm Ứng tuyển ngay dưới đây."
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "job-detail__information-detail--actions",
+    "text": "Hạn nộp hồ sơ: 09/01/2026\nỨng tuyển ngay\nLưu tin\nXem số người đã ứng tuyển\nNew"
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "job-detail__information-detail--actions-button box-apply-success",
+    "text": "Ứng tuyển lại\n\n\n    \n        \n    \n    Nhắn tin"
+  },
+  {
+    "tag": "A",
+    "id": "",
+    "class": "job-detail__info--actions-button button-primary open-apply-modal",
+    "text": "Ứng tuyển lại"
+  },
+  {
+    "tag": "A",
+    "id": "",
+    "class": "job-detail__info--actions-button button-white",
+    "text": "Nhắn tin"
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "job-detail__information-detail--actions-label",
+    "text": "Hạn nộp hồ sơ: 09/01/2026"
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "job-detail__information-detail--actions-button box-apply-current",
+    "text": "Ứng tuyển ngay\nLưu tin"
+  },
+  {
+    "tag": "A",
+    "id": "",
+    "class": "job-detail__info--actions-button button-primary btn-apply-job",
+    "text": "Ứng tuyển ngay"
+  },
+  {
+    "tag": "A",
+    "id": "",
+    "class": "job-detail__info--actions-button button-white",
+    "text": "Lưu tin"
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "job-detail__information-detail--report",
+    "text": "Báo cáo tin tuyển dụng: Nếu bạn thấy rằng tin tuyển dụng này không đúng hoặc có dấu hiệu lừa đảo, hãy phản ánh với chúng tôi."
+  },
+  {
+    "tag": "A",
+    "id": "",
+    "class": "btn-notice-job color-green",
+    "text": "hãy phản ánh với chúng tôi."
+  },
+  {
+    "tag": "DIV",
+    "id": "box-job-similar",
+    "class": "box-job-similar lazy entered",
+    "text": "Việc làm liên quan\nLập Trình Viên .NET - Thu Nhập Đến 18 Triệu + Thưởng + Phụ Cấp - Đi Làm Ngay, Nghỉ Thứ 7\nCÔNG TY TNHH NỀN TẢNG CHUYỂN ĐỔI SỐ VIỆT NAM\n10 - 18 triệu\nHà Nội\nCập nhật 15 phút trước\nChuyên Viên Phát Triển Phần Mềm IT\nPro\nNgân Hàng Bảo Việt\nThoả thuận\nHà Nội\nCập nhật 15 phút trước\nLập Trình Viên Python + Angular Up To 2000 USD\nCÔNG TY TNHH TECHVICO\n1,500 - 2,000 USD\nHà Nội\nCập nhật 6 giờ trước\nBackEnd Developer 3ys+\nCÔNG TY TNHH CÔNG NGHỆ THÔNG TIN VÀ VIỄN THÔNG DOLPHIN\nTừ 25 triệu"
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "job-body row",
+    "text": "Lập Trình Viên .NET - Thu Nhập Đến 18 Triệu + Thưởng + Phụ Cấp - Đi Làm Ngay, Nghỉ Thứ 7\nCÔNG TY TNHH NỀN TẢNG CHUYỂN ĐỔI SỐ VIỆT NAM\n10 - 18 triệu\nHà Nội\nCập nhật 15 phút trước\nChuyên Viên Phát Triển Phần Mềm IT\nPro\nNgân Hàng Bảo Việt\nThoả thuận\nHà Nội\nCập nhật 15 phút trước\nLập Trình Viên Python + Angular Up To 2000 USD\nCÔNG TY TNHH TECHVICO\n1,500 - 2,000 USD\nHà Nội\nCập nhật 6 giờ trước\nBackEnd Developer 3ys+\nCÔNG TY TNHH CÔNG NGHỆ THÔNG TIN VÀ VIỄN THÔNG DOLPHIN\nTừ 25 triệu\nHà Nội\nCập nhật 16"
+  },
+  {
+    "tag": "DIV",
+    "id": "box-relate-jobs",
+    "class": "box_general",
+    "text": "Lập Trình Viên .NET - Thu Nhập Đến 18 Triệu + Thưởng + Phụ Cấp - Đi Làm Ngay, Nghỉ Thứ 7\nCÔNG TY TNHH NỀN TẢNG CHUYỂN ĐỔI SỐ VIỆT NAM\n10 - 18 triệu\nHà Nội\nCập nhật 15 phút trước\nChuyên Viên Phát Triển Phần Mềm IT\nPro\nNgân Hàng Bảo Việt\nThoả thuận\nHà Nội\nCập nhật 15 phút trước\nLập Trình Viên Python + Angular Up To 2000 USD\nCÔNG TY TNHH TECHVICO\n1,500 - 2,000 USD\nHà Nội\nCập nhật 6 giờ trước\nBackEnd Developer 3ys+\nCÔNG TY TNHH CÔNG NGHỆ THÔNG TIN VÀ VIỄN THÔNG DOLPHIN\nTừ 25 triệu\nHà Nội\nCập nhật 16"
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "job-list-page-suggest",
+    "text": "Lập Trình Viên .NET - Thu Nhập Đến 18 Triệu + Thưởng + Phụ Cấp - Đi Làm Ngay, Nghỉ Thứ 7\nCÔNG TY TNHH NỀN TẢNG CHUYỂN ĐỔI SỐ VIỆT NAM\n10 - 18 triệu\nHà Nội\nCập nhật 15 phút trước\nChuyên Viên Phát Triển Phần Mềm IT\nPro\nNgân Hàng Bảo Việt\nThoả thuận\nHà Nội\nCập nhật 15 phút trước\nLập Trình Viên Python + Angular Up To 2000 USD\nCÔNG TY TNHH TECHVICO\n1,500 - 2,000 USD\nHà Nội\nCập nhật 6 giờ trước\nBackEnd Developer 3ys+\nCÔNG TY TNHH CÔNG NGHỆ THÔNG TIN VÀ VIỄN THÔNG DOLPHIN\nTừ 25 triệu\nHà Nội\nCập nhật 16"
+  },
+  {
+    "tag": "DIV",
+    "id": "item_suggest_job_1982488",
+    "class": "job-item-page-suggest\n                                 bg-highlight\n                 job-ta\n                                ",
+    "text": "Lập Trình Viên .NET - Thu Nhập Đến 18 Triệu + Thưởng + Phụ Cấp - Đi Làm Ngay, Nghỉ Thứ 7\nCÔNG TY TNHH NỀN TẢNG CHUYỂN ĐỔI SỐ VIỆT NAM\n10 - 18 triệu\nHà Nội\nCập nhật 15 phút trước"
+  },
+  {
+    "tag": "A",
+    "id": "",
+    "class": "company",
+    "text": "CÔNG TY TNHH NỀN TẢNG CHUYỂN ĐỔI SỐ VIỆT NAM"
+  },
+  {
+    "tag": "SPAN",
+    "id": "",
+    "class": "company-name",
+    "text": "CÔNG TY TNHH NỀN TẢNG CHUYỂN ĐỔI SỐ VIỆT NAM"
+  },
+  {
+    "tag": "LABEL",
+    "id": "",
+    "class": "title-salary",
+    "text": "10 - 18 triệu"
+  },
+  {
+    "tag": "LABEL",
+    "id": "",
+    "class": "address",
+    "text": "Hà Nội"
+  },
+  {
+    "tag": "LABEL",
+    "id": "",
+    "class": "address mobile-hidden label-update",
+    "text": "Cập nhật 15 phút trước"
+  },
+  {
+    "tag": "DIV",
+    "id": "item_suggest_job_1986286",
+    "class": "job-item-page-suggest\n                                 bg-highlight\n                 job-ta\n                                ",
+    "text": "Chuyên Viên Phát Triển Phần Mềm IT\nPro\nNgân Hàng Bảo Việt\nThoả thuận\nHà Nội\nCập nhật 15 phút trước"
+  },
+  {
+    "tag": "A",
+    "id": "",
+    "class": "company job-pro",
+    "text": "Pro\nNgân Hàng Bảo Việt"
+  },
+  {
+    "tag": "SPAN",
+    "id": "",
+    "class": "company-name",
+    "text": "Ngân Hàng Bảo Việt"
+  },
+  {
+    "tag": "LABEL",
+    "id": "",
+    "class": "title-salary",
+    "text": "Thoả thuận"
+  },
+  {
+    "tag": "LABEL",
+    "id": "",
+    "class": "address",
+    "text": "Hà Nội"
+  },
+  {
+    "tag": "LABEL",
+    "id": "",
+    "class": "address mobile-hidden label-update",
+    "text": "Cập nhật 15 phút trước"
+  },
+  {
+    "tag": "DIV",
+    "id": "item_suggest_job_1980328",
+    "class": "job-item-page-suggest\n                                 job-ta\n                                ",
+    "text": "Lập Trình Viên Python + Angular Up To 2000 USD\nCÔNG TY TNHH TECHVICO\n1,500 - 2,000 USD\nHà Nội\nCập nhật 6 giờ trước"
+  },
+  {
+    "tag": "A",
+    "id": "",
+    "class": "company",
+    "text": "CÔNG TY TNHH TECHVICO"
+  },
+  {
+    "tag": "SPAN",
+    "id": "",
+    "class": "company-name",
+    "text": "CÔNG TY TNHH TECHVICO"
+  },
+  {
+    "tag": "LABEL",
+    "id": "",
+    "class": "title-salary",
+    "text": "1,500 - 2,000 USD"
+  },
+  {
+    "tag": "LABEL",
+    "id": "",
+    "class": "address",
+    "text": "Hà Nội"
+  },
+  {
+    "tag": "LABEL",
+    "id": "",
+    "class": "address mobile-hidden label-update",
+    "text": "Cập nhật 6 giờ trước"
+  },
+  {
+    "tag": "DIV",
+    "id": "item_suggest_job_1991395",
+    "class": "job-item-page-suggest\n                                 bg-yellow\n\t\t\t\t job-ta\n                                ",
+    "text": "BackEnd Developer 3ys+\nCÔNG TY TNHH CÔNG NGHỆ THÔNG TIN VÀ VIỄN THÔNG DOLPHIN\nTừ 25 triệu\nHà Nội\nCập nhật 16 phút trước"
+  },
+  {
+    "tag": "A",
+    "id": "",
+    "class": "company",
+    "text": "CÔNG TY TNHH CÔNG NGHỆ THÔNG TIN VÀ VIỄN THÔNG DOLPHIN"
+  },
+  {
+    "tag": "SPAN",
+    "id": "",
+    "class": "company-name",
+    "text": "CÔNG TY TNHH CÔNG NGHỆ THÔNG TIN VÀ VIỄN THÔNG DOLPHIN"
+  },
+  {
+    "tag": "LABEL",
+    "id": "",
+    "class": "title-salary",
+    "text": "Từ 25 triệu"
+  },
+  {
+    "tag": "LABEL",
+    "id": "",
+    "class": "address",
+    "text": "Hà Nội"
+  },
+  {
+    "tag": "LABEL",
+    "id": "",
+    "class": "address mobile-hidden label-update",
+    "text": "Cập nhật 16 phút trước"
+  },
+  {
+    "tag": "DIV",
+    "id": "item_suggest_job_1992636",
+    "class": "job-item-page-suggest\n                                 bg-yellow\n\t\t\t\t job-ta\n                                ",
+    "text": "Test Engineer (N2/N3) \nCông ty TNHH CMC GLOBAL\nThoả thuận\nHà Nội\nCập nhật 16 phút trước"
+  },
+  {
+    "tag": "A",
+    "id": "",
+    "class": "company",
+    "text": "Công ty TNHH CMC GLOBAL"
+  },
+  {
+    "tag": "SPAN",
+    "id": "",
+    "class": "company-name",
+    "text": "Công ty TNHH CMC GLOBAL"
+  },
+  {
+    "tag": "LABEL",
+    "id": "",
+    "class": "title-salary",
+    "text": "Thoả thuận"
+  },
+  {
+    "tag": "LABEL",
+    "id": "",
+    "class": "address",
+    "text": "Hà Nội"
+  },
+  {
+    "tag": "LABEL",
+    "id": "",
+    "class": "address mobile-hidden label-update",
+    "text": "Cập nhật 16 phút trước"
+  },
+  {
+    "tag": "DIV",
+    "id": "item_suggest_job_1989994",
+    "class": "job-item-page-suggest\n                                 bg-yellow\n\t\t\t\t job-ta\n                                ",
+    "text": "Middle Full-Stack Web Dev\nCông ty cổ phần PT HUB\nTới 40 triệu\nHà Nội\nCập nhật 16 phút trước"
+  },
+  {
+    "tag": "A",
+    "id": "",
+    "class": "company",
+    "text": "Công ty cổ phần PT HUB"
+  },
+  {
+    "tag": "SPAN",
+    "id": "",
+    "class": "company-name",
+    "text": "Công ty cổ phần PT HUB"
+  },
+  {
+    "tag": "LABEL",
+    "id": "",
+    "class": "title-salary",
+    "text": "Tới 40 triệu"
+  },
+  {
+    "tag": "LABEL",
+    "id": "",
+    "class": "address",
+    "text": "Hà Nội"
+  },
+  {
+    "tag": "LABEL",
+    "id": "",
+    "class": "address mobile-hidden label-update",
+    "text": "Cập nhật 16 phút trước"
+  },
+  {
+    "tag": "DIV",
+    "id": "item_suggest_job_1983589",
+    "class": "job-item-page-suggest\n                                 bg-yellow\n\t\t\t\t job-ta\n                                ",
+    "text": "Java Software Engineer\nCông ty TNHH Compax Software Development Việt Nam\nThoả thuận\nHà Nội\nCập nhật 15 phút trước"
+  },
+  {
+    "tag": "A",
+    "id": "",
+    "class": "company",
+    "text": "Công ty TNHH Compax Software Development Việt Nam"
+  },
+  {
+    "tag": "SPAN",
+    "id": "",
+    "class": "company-name",
+    "text": "Công ty TNHH Compax Software Development Việt Nam"
+  },
+  {
+    "tag": "LABEL",
+    "id": "",
+    "class": "title-salary",
+    "text": "Thoả thuận"
+  },
+  {
+    "tag": "LABEL",
+    "id": "",
+    "class": "address",
+    "text": "Hà Nội"
+  },
+  {
+    "tag": "LABEL",
+    "id": "",
+    "class": "address mobile-hidden label-update",
+    "text": "Cập nhật 15 phút trước"
+  },
+  {
+    "tag": "DIV",
+    "id": "item_suggest_job_1992413",
+    "class": "job-item-page-suggest\n                                 bg-yellow\n\t\t\t\t job-ta\n                                ",
+    "text": "Fresher Web Developer (C#, .NET)\nCông ty Cổ phần MISA\nTới 4 triệu\nHà Nội\nCập nhật 15 phút trước"
+  },
+  {
+    "tag": "A",
+    "id": "",
+    "class": "company",
+    "text": "Công ty Cổ phần MISA"
+  },
+  {
+    "tag": "SPAN",
+    "id": "",
+    "class": "company-name",
+    "text": "Công ty Cổ phần MISA"
+  },
+  {
+    "tag": "LABEL",
+    "id": "",
+    "class": "title-salary",
+    "text": "Tới 4 triệu"
+  },
+  {
+    "tag": "LABEL",
+    "id": "",
+    "class": "address",
+    "text": "Hà Nội"
+  },
+  {
+    "tag": "LABEL",
+    "id": "",
+    "class": "address mobile-hidden label-update",
+    "text": "Cập nhật 15 phút trước"
+  },
+  {
+    "tag": "DIV",
+    "id": "item_suggest_job_1561212",
+    "class": "job-item-page-suggest\n                                 bg-yellow\n\t\t\t\t job-ta\n                                ",
+    "text": "Senior Java Developer ( Up To 40M )\nCông ty Cổ phần Phần mềm Việt Quốc tế (VSII)\n30 - 40 triệu\nHà Nội\nCập nhật 16 phút trước"
+  },
+  {
+    "tag": "A",
+    "id": "",
+    "class": "company",
+    "text": "Công ty Cổ phần Phần mềm Việt Quốc tế (VSII)"
+  },
+  {
+    "tag": "SPAN",
+    "id": "",
+    "class": "company-name",
+    "text": "Công ty Cổ phần Phần mềm Việt Quốc tế (VSII)"
+  },
+  {
+    "tag": "LABEL",
+    "id": "",
+    "class": "title-salary",
+    "text": "30 - 40 triệu"
+  },
+  {
+    "tag": "LABEL",
+    "id": "",
+    "class": "address",
+    "text": "Hà Nội"
+  },
+  {
+    "tag": "LABEL",
+    "id": "",
+    "class": "address mobile-hidden label-update",
+    "text": "Cập nhật 16 phút trước"
+  },
+  {
+    "tag": "DIV",
+    "id": "item_suggest_job_1986397",
+    "class": "job-item-page-suggest\n                                 bg-yellow\n\t\t\t\t job-ta\n                                ",
+    "text": "ServiceNow Engineer (ITSM) - JPN\nCông ty Cổ phần GEM\n30 - 60 triệu\nHồ Chí Minh (mới) & Hà Nội\nCập nhật 15 phút trước"
+  },
+  {
+    "tag": "A",
+    "id": "",
+    "class": "company",
+    "text": "Công ty Cổ phần GEM"
+  },
+  {
+    "tag": "SPAN",
+    "id": "",
+    "class": "company-name",
+    "text": "Công ty Cổ phần GEM"
+  },
+  {
+    "tag": "LABEL",
+    "id": "",
+    "class": "title-salary",
+    "text": "30 - 60 triệu"
+  },
+  {
+    "tag": "LABEL",
+    "id": "",
+    "class": "address",
+    "text": "Hồ Chí Minh (mới) & Hà Nội"
+  },
+  {
+    "tag": "LABEL",
+    "id": "",
+    "class": "address mobile-hidden label-update",
+    "text": "Cập nhật 15 phút trước"
+  },
+  {
+    "tag": "DIV",
+    "id": "item_suggest_job_1983165",
+    "class": "job-item-page-suggest\n                                 bg-yellow\n\t\t\t\t job-ta\n                                ",
+    "text": "Junior Software Engineer\nCông ty TNHH Edtech Cole\n8 - 20 triệu\nHà Nội\nCập nhật 15 phút trước"
+  },
+  {
+    "tag": "A",
+    "id": "",
+    "class": "company",
+    "text": "Công ty TNHH Edtech Cole"
+  },
+  {
+    "tag": "SPAN",
+    "id": "",
+    "class": "company-name",
+    "text": "Công ty TNHH Edtech Cole"
+  },
+  {
+    "tag": "LABEL",
+    "id": "",
+    "class": "title-salary",
+    "text": "8 - 20 triệu"
+  },
+  {
+    "tag": "LABEL",
+    "id": "",
+    "class": "address",
+    "text": "Hà Nội"
+  },
+  {
+    "tag": "LABEL",
+    "id": "",
+    "class": "address mobile-hidden label-update",
+    "text": "Cập nhật 15 phút trước"
+  },
+  {
+    "tag": "DIV",
+    "id": "item_suggest_job_1991393",
+    "class": "job-item-page-suggest\n                                 bg-yellow\n\t\t\t\t job-ta\n                                ",
+    "text": "Backend Developer\nCÔNG TY TNHH CÔNG NGHỆ THÔNG TIN VÀ VIỄN THÔNG DOLPHIN\nThoả thuận\nHà Nội\nCập nhật 16 phút trước"
+  },
+  {
+    "tag": "A",
+    "id": "",
+    "class": "company",
+    "text": "CÔNG TY TNHH CÔNG NGHỆ THÔNG TIN VÀ VIỄN THÔNG DOLPHIN"
+  },
+  {
+    "tag": "SPAN",
+    "id": "",
+    "class": "company-name",
+    "text": "CÔNG TY TNHH CÔNG NGHỆ THÔNG TIN VÀ VIỄN THÔNG DOLPHIN"
+  },
+  {
+    "tag": "LABEL",
+    "id": "",
+    "class": "title-salary",
+    "text": "Thoả thuận"
+  },
+  {
+    "tag": "LABEL",
+    "id": "",
+    "class": "address",
+    "text": "Hà Nội"
+  },
+  {
+    "tag": "LABEL",
+    "id": "",
+    "class": "address mobile-hidden label-update",
+    "text": "Cập nhật 16 phút trước"
+  },
+  {
+    "tag": "DIV",
+    "id": "item_suggest_job_1987439",
+    "class": "job-item-page-suggest\n                                 job-ta\n                                ",
+    "text": "Lập Trình Viên .Net\nCty TNHH Thundersoft Việt Nam\n15 - 20 triệu\nHà Nội\nCập nhật 1 tuần trước"
+  },
+  {
+    "tag": "A",
+    "id": "",
+    "class": "company",
+    "text": "Cty TNHH Thundersoft Việt Nam"
+  },
+  {
+    "tag": "SPAN",
+    "id": "",
+    "class": "company-name",
+    "text": "Cty TNHH Thundersoft Việt Nam"
+  },
+  {
+    "tag": "LABEL",
+    "id": "",
+    "class": "title-salary",
+    "text": "15 - 20 triệu"
+  },
+  {
+    "tag": "LABEL",
+    "id": "",
+    "class": "address",
+    "text": "Hà Nội"
+  },
+  {
+    "tag": "LABEL",
+    "id": "",
+    "class": "address mobile-hidden label-update",
+    "text": "Cập nhật 1 tuần trước"
+  },
+  {
+    "tag": "DIV",
+    "id": "item_suggest_job_1989121",
+    "class": "job-item-page-suggest\n                                 job-ta\n                                ",
+    "text": "ReactJS Developer\nCÔNG TY TNHH POLITETECH\nThoả thuận\nHà Nội\nCập nhật 6 ngày trước"
+  },
+  {
+    "tag": "A",
+    "id": "",
+    "class": "company",
+    "text": "CÔNG TY TNHH POLITETECH"
+  },
+  {
+    "tag": "SPAN",
+    "id": "",
+    "class": "company-name",
+    "text": "CÔNG TY TNHH POLITETECH"
+  },
+  {
+    "tag": "LABEL",
+    "id": "",
+    "class": "title-salary",
+    "text": "Thoả thuận"
+  },
+  {
+    "tag": "LABEL",
+    "id": "",
+    "class": "address",
+    "text": "Hà Nội"
+  },
+  {
+    "tag": "LABEL",
+    "id": "",
+    "class": "address mobile-hidden label-update",
+    "text": "Cập nhật 6 ngày trước"
+  },
+  {
+    "tag": "DIV",
+    "id": "item_suggest_job_1963931",
+    "class": "job-item-page-suggest\n                                 job-ta\n                                ",
+    "text": "Middle .NET Developer - EN Đọc Hiểu\nNewwave Solutions JSC\nTới 25 triệu\nHà Nội\nCập nhật 2 tuần trước"
+  },
+  {
+    "tag": "A",
+    "id": "",
+    "class": "company",
+    "text": "Newwave Solutions JSC"
+  },
+  {
+    "tag": "SPAN",
+    "id": "",
+    "class": "company-name",
+    "text": "Newwave Solutions JSC"
+  },
+  {
+    "tag": "LABEL",
+    "id": "",
+    "class": "title-salary",
+    "text": "Tới 25 triệu"
+  },
+  {
+    "tag": "LABEL",
+    "id": "",
+    "class": "address",
+    "text": "Hà Nội"
+  },
+  {
+    "tag": "LABEL",
+    "id": "",
+    "class": "address mobile-hidden label-update",
+    "text": "Cập nhật 2 tuần trước"
+  },
+  {
+    "tag": "DIV",
+    "id": "item_suggest_job_1974535",
+    "class": "job-item-page-suggest\n                                 job-ta\n                                ",
+    "text": "Cán Bộ Phát Triển Phần Mềm\nCông ty cổ phần tháp nước hà nội\n20 - 25 triệu\nHà Nội\nCập nhật 2 tuần trước"
+  },
+  {
+    "tag": "A",
+    "id": "",
+    "class": "company",
+    "text": "Công ty cổ phần tháp nước hà nội"
+  },
+  {
+    "tag": "SPAN",
+    "id": "",
+    "class": "company-name",
+    "text": "Công ty cổ phần tháp nước hà nội"
+  },
+  {
+    "tag": "LABEL",
+    "id": "",
+    "class": "title-salary",
+    "text": "20 - 25 triệu"
+  },
+  {
+    "tag": "LABEL",
+    "id": "",
+    "class": "address",
+    "text": "Hà Nội"
+  },
+  {
+    "tag": "LABEL",
+    "id": "",
+    "class": "address mobile-hidden label-update",
+    "text": "Cập nhật 2 tuần trước"
+  },
+  {
+    "tag": "DIV",
+    "id": "item_suggest_job_1982718",
+    "class": "job-item-page-suggest\n                                 job-ta\n                                ",
+    "text": "Fullstack Developer\nTECHVIFY SOFTWARE., JSC\nThoả thuận\nHà Nội\nCập nhật 1 tuần trước"
+  },
+  {
+    "tag": "A",
+    "id": "",
+    "class": "company",
+    "text": "TECHVIFY SOFTWARE., JSC"
+  },
+  {
+    "tag": "SPAN",
+    "id": "",
+    "class": "company-name",
+    "text": "TECHVIFY SOFTWARE., JSC"
+  },
+  {
+    "tag": "LABEL",
+    "id": "",
+    "class": "title-salary",
+    "text": "Thoả thuận"
+  },
+  {
+    "tag": "LABEL",
+    "id": "",
+    "class": "address",
+    "text": "Hà Nội"
+  },
+  {
+    "tag": "LABEL",
+    "id": "",
+    "class": "address mobile-hidden label-update",
+    "text": "Cập nhật 1 tuần trước"
+  },
+  {
+    "tag": "DIV",
+    "id": "item_suggest_job_1974545",
+    "class": "job-item-page-suggest\n                                 job-ta\n                                ",
+    "text": "Chuyên Viên Phát Triển Phần Mềm\nCÔNG TY CỔ PHẦN THÁP NƯỚC HÀ NỘI\n20 - 25 triệu\nHà Nội\nCập nhật 2 tuần trước"
+  },
+  {
+    "tag": "A",
+    "id": "",
+    "class": "company",
+    "text": "CÔNG TY CỔ PHẦN THÁP NƯỚC HÀ NỘI"
+  },
+  {
+    "tag": "SPAN",
+    "id": "",
+    "class": "company-name",
+    "text": "CÔNG TY CỔ PHẦN THÁP NƯỚC HÀ NỘI"
+  },
+  {
+    "tag": "LABEL",
+    "id": "",
+    "class": "title-salary",
+    "text": "20 - 25 triệu"
+  },
+  {
+    "tag": "LABEL",
+    "id": "",
+    "class": "address",
+    "text": "Hà Nội"
+  },
+  {
+    "tag": "LABEL",
+    "id": "",
+    "class": "address mobile-hidden label-update",
+    "text": "Cập nhật 2 tuần trước"
+  },
+  {
+    "tag": "DIV",
+    "id": "item_suggest_job_1977796",
+    "class": "job-item-page-suggest\n                                 job-ta\n                                ",
+    "text": "Java Developer\nCÔNG TY CỔ PHẦN CÔNG NGHỆ ALPHAWAY\n20 - 34 triệu\nHà Nội\nCập nhật 2 tuần trước"
+  },
+  {
+    "tag": "A",
+    "id": "",
+    "class": "company",
+    "text": "CÔNG TY CỔ PHẦN CÔNG NGHỆ ALPHAWAY"
+  },
+  {
+    "tag": "SPAN",
+    "id": "",
+    "class": "company-name",
+    "text": "CÔNG TY CỔ PHẦN CÔNG NGHỆ ALPHAWAY"
+  },
+  {
+    "tag": "LABEL",
+    "id": "",
+    "class": "title-salary",
+    "text": "20 - 34 triệu"
+  },
+  {
+    "tag": "LABEL",
+    "id": "",
+    "class": "address",
+    "text": "Hà Nội"
+  },
+  {
+    "tag": "LABEL",
+    "id": "",
+    "class": "address mobile-hidden label-update",
+    "text": "Cập nhật 2 tuần trước"
+  },
+  {
+    "tag": "DIV",
+    "id": "item_suggest_job_1974518",
+    "class": "job-item-page-suggest\n                                 job-ta\n                                ",
+    "text": "Cán Bộ Phát Triển Phần Mềm\nCÔNG TY TNHH ĐẦU TƯ ĐỒNG LỰC\n20 - 25 triệu\nHà Nội\nCập nhật 2 tuần trước"
+  },
+  {
+    "tag": "A",
+    "id": "",
+    "class": "company",
+    "text": "CÔNG TY TNHH ĐẦU TƯ ĐỒNG LỰC"
+  },
+  {
+    "tag": "SPAN",
+    "id": "",
+    "class": "company-name",
+    "text": "CÔNG TY TNHH ĐẦU TƯ ĐỒNG LỰC"
+  },
+  {
+    "tag": "LABEL",
+    "id": "",
+    "class": "title-salary",
+    "text": "20 - 25 triệu"
+  },
+  {
+    "tag": "LABEL",
+    "id": "",
+    "class": "address",
+    "text": "Hà Nội"
+  },
+  {
+    "tag": "LABEL",
+    "id": "",
+    "class": "address mobile-hidden label-update",
+    "text": "Cập nhật 2 tuần trước"
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "job-detail__body-right",
+    "text": "CÔNG TY CỔ PHẦN SMARTOSC\nPro Company\nQuy mô:\n1000+ nhân viên\nLĩnh vực:\nTư vấn\nĐịa điểm:\nHN: Tòa nhà Handico, đường Phạm Hùng, Hà Nội\nXem trang công ty\nThông tin chung\nCấp bậc\nNhân viên\nHọc vấn\nĐại Học trở lên\nSố lượng tuyển\n3 người\nHình thức làm việc\nToàn thời gian\nDanh mục Nghề liên quan\nCông nghệ Thông tin\nSoftware Engineering\nSoftware Engineer\nViệc làm IT\nKhu vực\nHà Nội\nPhường Từ Liêm - Hà Nội\nBí kíp Tìm việc an toàn\n\nDưới đây là những dấu hiệu của các tổ chức, cá nhân tuyển dụng không minh b"
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "job-detail__box--right job-detail__company",
+    "text": "CÔNG TY CỔ PHẦN SMARTOSC\nPro Company\nQuy mô:\n1000+ nhân viên\nLĩnh vực:\nTư vấn\nĐịa điểm:\nHN: Tòa nhà Handico, đường Phạm Hùng, Hà Nội\nXem trang công ty"
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "job-detail__company--information",
+    "text": "CÔNG TY CỔ PHẦN SMARTOSC\nPro Company\nQuy mô:\n1000+ nhân viên\nLĩnh vực:\nTư vấn\nĐịa điểm:\nHN: Tòa nhà Handico, đường Phạm Hùng, Hà Nội"
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "job-detail__company--information-item company-name",
+    "text": "CÔNG TY CỔ PHẦN SMARTOSC\nPro Company"
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "company-name-label",
+    "text": "CÔNG TY CỔ PHẦN SMARTOSC\nPro Company"
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "company-subdetail-label",
+    "text": "Pro Company"
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "company-content__title",
+    "text": "Pro Company"
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "company-content__title--label",
+    "text": "Pro Company"
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "job-pro-wrap detail-job",
+    "text": "Pro Company"
+  },
+  {
+    "tag": "SPAN",
+    "id": "",
+    "class": "job-pro-icon",
+    "text": "Pro Company"
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "job-detail__company--information-item company-scale",
+    "text": "Quy mô:\n1000+ nhân viên"
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "company-title",
+    "text": "Quy mô:"
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "company-value",
+    "text": "1000+ nhân viên"
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "job-detail__company--information-item company-field",
+    "text": "Lĩnh vực:\nTư vấn"
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "company-title",
+    "text": "Lĩnh vực:"
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "company-value",
+    "text": "Tư vấn"
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "job-detail__company--information-item company-address",
+    "text": "Địa điểm:\nHN: Tòa nhà Handico, đường Phạm Hùng, Hà Nội"
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "company-title",
+    "text": "Địa điểm:"
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "company-value",
+    "text": "HN: Tòa nhà Handico, đường Phạm Hùng, Hà Nội"
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "job-detail__company--link",
+    "text": "Xem trang công ty"
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "job-detail__box--right job-detail__body-right--item job-detail__body-right--box-general",
+    "text": "Thông tin chung\nCấp bậc\nNhân viên\nHọc vấn\nĐại Học trở lên\nSố lượng tuyển\n3 người\nHình thức làm việc\nToàn thời gian"
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "job-detail__box--right job-detail__body-right--item job-detail__body-right--box-category",
+    "text": "Danh mục Nghề liên quan\nCông nghệ Thông tin\nSoftware Engineering\nSoftware Engineer\nViệc làm IT\nKhu vực\nHà Nội\nPhường Từ Liêm - Hà Nội"
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "box-report-job",
+    "text": "Bí kíp Tìm việc an toàn\n\nDưới đây là những dấu hiệu của các tổ chức, cá nhân tuyển dụng không minh bạch:\n\nDấu hiệu phổ biến:\n\nNội dung mô tả công việc sơ sài, không đồng nhất với công việc thực tế\n\nHứa hẹn \"việc nhẹ lương cao\", không cần bỏ nhiều công sức dễ dàng lấy tiền \"khủng\"\n\nCần làm gì khi gặp việc làm, công ty không minh bạch:\nKiểm tra thông tin về công ty, việc làm trước khi ứng tuyển\nBáo cáo tin tuyển dụng với TopCV thông qua nút \"Báo cáo tin tuyển dụng\" để được hỗ trợ và giúp các ứng v"
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "box-report-job__title",
+    "text": "Bí kíp Tìm việc an toàn"
+  },
+  {
+    "tag": "A",
+    "id": "",
+    "class": "box-report-job__action",
+    "text": "Báo cáo tin tuyển dụng"
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "box-easy-content job-detail__box--right job-detail__body-right--item",
+    "text": "Vị trí Senior Back-End Developer (NodeJS) tuyển dụng bởi công ty CÔNG TY CỔ PHẦN SMARTOSC tại Hà Nội, Phường Từ Liêm - Hà Nội với mức lương 28 - 45 triệu yêu cầu hình thức làm việc Toàn thời gian. Bạn có thể tham khảo thêm các vị trí tuyển dụng Back-End Developer tại Hà Nội, Phường Từ Liêm - Hà Nội khác trên kênh tuyển dụng việc làm topcv."
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "box-job-similar__note",
+    "text": "Vị trí Senior Back-End Developer (NodeJS) tuyển dụng bởi công ty CÔNG TY CỔ PHẦN SMARTOSC tại Hà Nội, Phường Từ Liêm - Hà Nội với mức lương 28 - 45 triệu yêu cầu hình thức làm việc Toàn thời gian. Bạn có thể tham khảo thêm các vị trí tuyển dụng Back-End Developer tại Hà Nội, Phường Từ Liêm - Hà Nội khác trên kênh tuyển dụng việc làm topcv."
+  },
+  {
+    "tag": "DIV",
+    "id": "box-find-categories-job",
+    "class": "col-md-4",
+    "text": "Tìm việc làm theo ngành nghề\nViệc làm An toàn lao động\nViệc làm Bán hàng kỹ thuật\nViệc làm Bán lẻ / bán sỉ\nViệc làm Báo chí / Truyền hình\nViệc làm Bảo hiểm\nViệc làm Bảo trì / Sửa chữa\nViệc làm Bất động sản\nViệc làm Biên / Phiên dịch\nViệc làm Bưu chính - Viễn thông\nViệc làm Chứng khoán / Vàng / Ngoại tệ\nViệc làm Cơ khí / Chế tạo / Tự động hóa\nViệc làm Công nghệ cao\nViệc làm Công nghệ Ô tô\nViệc làm Công nghệ thông tin\nViệc làm Dầu khí/Hóa chất\nViệc làm Dệt may / Da giày\nViệc làm Địa chất / Khoáng "
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "ctn-list-jobs",
+    "text": "Việc làm An toàn lao động\nViệc làm Bán hàng kỹ thuật\nViệc làm Bán lẻ / bán sỉ\nViệc làm Báo chí / Truyền hình\nViệc làm Bảo hiểm\nViệc làm Bảo trì / Sửa chữa\nViệc làm Bất động sản\nViệc làm Biên / Phiên dịch\nViệc làm Bưu chính - Viễn thông\nViệc làm Chứng khoán / Vàng / Ngoại tệ\nViệc làm Cơ khí / Chế tạo / Tự động hóa\nViệc làm Công nghệ cao\nViệc làm Công nghệ Ô tô\nViệc làm Công nghệ thông tin\nViệc làm Dầu khí/Hóa chất\nViệc làm Dệt may / Da giày\nViệc làm Địa chất / Khoáng sản\nViệc làm Dịch vụ khách hà"
+  },
+  {
+    "tag": "DIV",
+    "id": "box-find-job-location",
+    "class": "col-md-4",
+    "text": "Tìm việc làm tại nhà\nViệc làm tại Hà Nội\nViệc làm tại Hồ Chí Minh\nViệc làm tại Bình Dương\nViệc làm tại Bắc Ninh\nViệc làm tại Đồng Nai\nViệc làm tại Hưng Yên\nViệc làm tại Hải Dương\nViệc làm tại Đà Nẵng\nViệc làm tại Hải Phòng\nViệc làm tại An Giang\nViệc làm tại Bà Rịa-Vũng Tàu\nViệc làm tại Bắc Giang\nViệc làm tại Bắc Kạn\nViệc làm tại Bạc Liêu\nViệc làm tại Bến Tre\nViệc làm tại Bình Định\nViệc làm tại Bình Phước\nViệc làm tại Bình Thuận\nViệc làm tại Cà Mau\nViệc làm tại Cần Thơ\nViệc làm tại Cao Bằng\nViệc "
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "ctn-list-jobs",
+    "text": "Việc làm tại Hà Nội\nViệc làm tại Hồ Chí Minh\nViệc làm tại Bình Dương\nViệc làm tại Bắc Ninh\nViệc làm tại Đồng Nai\nViệc làm tại Hưng Yên\nViệc làm tại Hải Dương\nViệc làm tại Đà Nẵng\nViệc làm tại Hải Phòng\nViệc làm tại An Giang\nViệc làm tại Bà Rịa-Vũng Tàu\nViệc làm tại Bắc Giang\nViệc làm tại Bắc Kạn\nViệc làm tại Bạc Liêu\nViệc làm tại Bến Tre\nViệc làm tại Bình Định\nViệc làm tại Bình Phước\nViệc làm tại Bình Thuận\nViệc làm tại Cà Mau\nViệc làm tại Cần Thơ\nViệc làm tại Cao Bằng\nViệc làm tại Cửu Long\nViệc"
+  },
+  {
+    "tag": "DIV",
+    "id": "box-find-job-common",
+    "class": "col-md-4",
+    "text": "Việc làm phổ biến\nTìm việc làm Content\nTìm việc làm Copywriter/Copywriting\nTìm việc làm Content Writer\nTìm việc làm Content Creator\nTìm việc làm Content Marketing\nTìm việc làm Social Content\nTìm việc làm Biên tập viên\nTìm việc làm Biên phiên dịch tiếng Anh\nTìm việc làm Giảng viên tiếng Anh\nTìm việc làm Trợ giảng tiếng Anh\nTìm việc làm Kế toán nội bộ\nTìm việc làm Video tiktok\nTìm việc làm Quản lý trình dược viên\nTìm việc làm Regional Sales Manager\nTìm việc làm Vận hành Tiktok\nTìm việc làm Livestr"
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "ctn-list-jobs",
+    "text": "Tìm việc làm Content\nTìm việc làm Copywriter/Copywriting\nTìm việc làm Content Writer\nTìm việc làm Content Creator\nTìm việc làm Content Marketing\nTìm việc làm Social Content\nTìm việc làm Biên tập viên\nTìm việc làm Biên phiên dịch tiếng Anh\nTìm việc làm Giảng viên tiếng Anh\nTìm việc làm Trợ giảng tiếng Anh\nTìm việc làm Kế toán nội bộ\nTìm việc làm Video tiktok\nTìm việc làm Quản lý trình dược viên\nTìm việc làm Regional Sales Manager\nTìm việc làm Vận hành Tiktok\nTìm việc làm Livestream tiktok\nTìm việ"
+  },
+  {
+    "tag": "DIV",
+    "id": "modal-confirm-job-remote",
+    "class": "modal fade",
+    "text": "Lưu ý khi ứng tuyển việc làm từ xa!\n        \n          ×\n        \n      \n      \n        Trước tình trạng gia tăng các hình thức lừa đảo việc làm trên internet được các cơ quan chức năng\n          cảnh báo, TopCV xin lưu ý bạn một số dấu hiệu lừa đảo việc làm như sau:\n\n        \n          \n            \n            Thông tin thiếu minh bạch\n          \n          \n            \n            Hứa hẹn lương cao bất thường\n          \n          \n            \n            Yêu cầu nạp tiền, mua hàng trên app/w"
+  },
+  {
+    "tag": "BUTTON",
+    "id": "",
+    "class": "btn btn-primary confirm-job-remote",
+    "text": "Tôi đã hiểu"
+  },
+  {
+    "tag": "DIV",
+    "id": "popup-setting-notification-job",
+    "class": "modal fade",
+    "text": "Tạo thông báo việc làm\n\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\n\t\t\t\t\n\t\t\t\n\t\t\t\n\t\t\t\t\n\t\t\t\t\t\n\t\t\t\t\t\t\n\t\t\t\t\t\t\tTừ khoá tìm kiếm\n\t\t\t\t\t\t\t*\n\t\t\t\t\t\n\t\t\t\t\t\n\t\t\t\t\t\t\n\n\t\t\t\t\t\t\n\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\n\t\t\t\t\t\t\n\t\t\t\t\t\t\tTỉnh/Thành phố\n\t\t\t\t\t\t\n\t\t\t\t\t\n\t\t\t\t\t\n\t\t\t\t\t\t\n\t\t\t\t\t\t\tTất cả tỉnh/thành phố\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tHà Nội\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tHồ Chí Minh\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tBình Dương\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tBắc Ninh\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tĐồng Nai\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tHưng Yên\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tHải Dương\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tĐà Nẵng\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tHải Phòng\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tAn Giang\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
+  },
+  {
+    "tag": "SELECT",
+    "id": "setting-notify-salary",
+    "class": "form-control select2",
+    "text": "Tất cả mức lương\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tDưới 10 triệu\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t10 - 15 triệu\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t15 - 20 triệu\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t20 - 25 triệu\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t25 - 30 triệu\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t30 - 50 triệu\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tTrên 50 triệu\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tThoả thuận"
+  },
+  {
+    "tag": "DIV",
+    "id": "category-filter-desktop-container-modal-job-notification",
+    "class": "category-filter-desktop-container",
+    "text": "Vị trí chuyên môn\n\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t{{ countSelectedCategoryLevel3 > 0 ? '(' + (countSelectedCategoryLevel3 > 99 ? '99+' : countSelectedCategoryLevel3) + ')' : '' }}\n\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\tTất cả vị trí chuyên môn\n\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\n\n\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\n        \n    \n        \n            \n                {{ isOnboardLayout ? 'Chọn Vị trí chuyên môn' : 'Chọn Nhóm nghề, Nghề hoặc Chuyên môn' }}\n            \n            \n "
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "level-1",
+    "text": "{{ allCategoryLevel?.[searchResult.level1]?.original_alias || allCategoryLevel?.[searchResult.level1]?.name || '' }}"
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "level-2",
+    "text": "{{ allCategoryLevel?.[searchResult.level2]?.original_alias || allCategoryLevel?.[searchResult.level2]?.name || '' }}"
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "category-level-1",
+    "text": "NHÓM NGHỀ\n                    \n                \n                \n                    \n                        \n                            \n                                \n                                    \n                                    \n                                \n\n                                \n                                    {{ allCategoryLevel[level1]?.original_alias || allCategoryLevel[level1]?.name || '' }}\n                                \n                            \n "
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "category-level-1__header",
+    "text": "NHÓM NGHỀ"
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "category-level-1__header-text",
+    "text": "NHÓM NGHỀ"
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "category-level-1__options",
+    "text": "{{ allCategoryLevel[level1]?.original_alias || allCategoryLevel[level1]?.name || '' }}\n                                \n                            \n                            \n                        \n\n                        \n                            \n                                NGHỀ\n                                VỊ TRÍ CHUYÊN MÔN\n                            \n\n                            \n                                \n                                    \n                          "
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "category-level-1__option",
+    "text": "{{ allCategoryLevel[level1]?.original_alias || allCategoryLevel[level1]?.name || '' }}\n                                \n                            \n                            \n                        \n\n                        \n                            \n                                NGHỀ\n                                VỊ TRÍ CHUYÊN MÔN\n                            \n\n                            \n                                \n                                    \n                          "
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "category-level-1__option-text",
+    "text": "{{ allCategoryLevel[level1]?.original_alias || allCategoryLevel[level1]?.name || '' }}"
+  },
+  {
+    "tag": "DIV",
+    "id": "modal-require-verify-to-setting-job-notification",
+    "class": "modal fade",
+    "text": "Yêu cầu xác thực tài khoản\n\t\t\t\n\t\t\t\n\t\t\t\tBạn vui lòng xác thực tài khoản để sử dụng tính năng này. Xác thực ngay tại đây.\n\t\t\t\n\t\t\t\n\t\t\t\tĐóng"
+  },
+  {
+    "tag": "DIV",
+    "id": "modal-notice-job",
+    "class": "modal fade",
+    "text": "Phản ánh tin tuyển dụng không chính xác\n                    \n                        Hãy tìm hiểu kỹ về nhà tuyển dụng và công việc bạn ứng tuyển. Bạn nên cẩn trọng với những công việc yêu cầu nộp phí, hoặc những hợp đồng mập mờ, không rõ ràng.\n                        \n                        Nếu bạn thấy rằng tin tuyển dụng này không đúng, hãy phản ánh với chúng tôi.\n                \n                \n                    \n                    \n                        Tin tuyển dụng:\n             "
+  },
+  {
+    "tag": "FORM",
+    "id": "form-notice-job",
+    "class": "form-horizontal",
+    "text": "Tin tuyển dụng:\n                        Senior Back-End Developer (NodeJS) - CÔNG TY CỔ PHẦN SMARTOSC\n                    \n                    \n                        Họ và tên: *\n                        \n                            \n                            Họ và tên không được trống\n                        \n                    \n                    \n                        Số điện thoại: *\n                        \n                            \n                            Số điện thoại không "
+  },
+  {
+    "tag": "P",
+    "id": "fullname-error",
+    "class": "text-danger job_report_input-error",
+    "text": "Họ và tên không được trống"
+  },
+  {
+    "tag": "P",
+    "id": "fullname-error",
+    "class": "text-danger job_report_input-error",
+    "text": "Số điện thoại không được để trống"
+  },
+  {
+    "tag": "P",
+    "id": "address-error",
+    "class": "text-danger job_report_input-error",
+    "text": "Địa chỉ không được trống"
+  },
+  {
+    "tag": "P",
+    "id": "email-error",
+    "class": "text-danger job_report_input-error",
+    "text": "Địa chỉ email không được trống"
+  },
+  {
+    "tag": "P",
+    "id": "content-error",
+    "class": "text-danger job_report_input-error",
+    "text": "Nội dung phản hồi không được trống"
+  },
+  {
+    "tag": "DIV",
+    "id": "modal-alert-location",
+    "class": "modal fade  pr-6",
+    "text": "Xác nhận địa điểm ứng tuyển \n                    \n\n                \n                \n                    \n                        \n                    \n                    \n                        Địa điểm làm việc của công việc này không gần địa chỉ của\n                            bạn\n\n                    \n                    \n                        \n                            \n                            \n                                \n                                    Tôi xác nhận có th"
+  },
+  {
+    "tag": "BUTTON",
+    "id": "alert-location-modal_action-cancel",
+    "class": "button",
+    "text": "Hủy ứng tuyển"
+  },
+  {
+    "tag": "BUTTON",
+    "id": "alert-location-modal_action-apply",
+    "class": "button disabled",
+    "text": "Ứng tuyển"
+  },
+  {
+    "tag": "DIV",
+    "id": "modal-batch-apply",
+    "class": "modal fade required-confirm-location",
+    "text": "Thêm lựa chọn - thêm cơ hội \n                                    TopCV đề xuất 0 tin tuyển dụng tương tự, hãy\n                                    chọn các tin phù hợp và click ứng tuyển để tăng cơ hội việc làm.\n                                   Chọn tất cả   Chọn CV để ứng tuyển     \n                                                                CV ứng tuyển gần nhất\n                                                             Xem     Chọn CV khác trong thư viện CV của tôi\n                    "
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "box-choose-location",
+    "text": "Chọn địa điểm làm việc mong muốn"
+  },
+  {
+    "tag": "DIV",
+    "id": "",
+    "class": "name-company",
+    "text": "Công ty Cổ phần TopCV Việt Nam"
+  },
+  {
+    "tag": "DIV",
+    "id": "modal-turn-on-location",
+    "class": "modal",
+    "text": "×\n                \n            \n            \n                Chia sẻ vị trí - Nhận việc như ý\n                \n                \n                    Hướng dẫn bật chia sẻ vị trí để Toppy Ai gợi ý những cơ hội việc làm phù hợp nhất dành riêng cho bạn"
+  },
+  {
+    "tag": "BUTTON",
+    "id": "",
+    "class": "btn btn-sign input-block-level w-100 h-40 mb-3 btn-primary-hover",
+    "text": "Đăng\n                                    nhập"
+  },
+  {
+    "tag": "A",
+    "id": "login-with-facebook",
+    "class": "btn btn-social btn-primary input-block-level mx-1 h-40 my-3 btn-login-social",
+    "text": "Facebook"
+  },
+  {
+    "tag": "A",
+    "id": "login-with-google",
+    "class": "btn btn-social btn-default input-block-level mx-1 h-40 my-3 btn-login-social",
+    "text": "Google"
+  },
+  {
+    "tag": "A",
+    "id": "",
+    "class": "btn btn-linkedin btn-social btn-default input-block-level mx-1 h-40 my-3 btn-login-social",
+    "text": "Linkedin"
+  },
+  {
+    "tag": "BUTTON",
+    "id": "",
+    "class": "btn btn-sign input-block-level w-100 h-40 mb-3 btn-primary-hover",
+    "text": "Đăng ký"
+  },
+  {
+    "tag": "SCRIPT",
+    "id": "template-custom-form-salary",
+    "class": "",
+    "text": "<form class=\"custom-form-salary\" id=\"custom-form-salary\">\n            <div class=\"box-field\">\n                <input type=\"number\" name=\"salary_min\" placeholder=\"Từ\" max=\"9999\">\n                <span>-</span>\n                <input type=\"number\" name=\"salary_max\" placeholder=\"Đến\" max=\"9999\">\n                <span>triệu</span>\n            </div>\n            <button type=\"button\" class=\"btn btn-apply-salary\">Áp dụng</button>\n        </form>"
+  }
+]
+
+✅ DEBUG FINISHED SUCCESSFULLY

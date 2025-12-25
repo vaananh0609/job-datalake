@@ -1,0 +1,30 @@
+name: Daily Job Crawler
+
+on:
+  schedule:
+    - cron: '0 1 * * *' # Chạy lúc 8:00 sáng VN hàng ngày
+  workflow_dispatch: # Chạy thủ công để test
+
+jobs:
+  crawl:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: Install Libraries
+        run: |
+          pip install -r requirements.txt
+          playwright install chromium
+
+      - name: Run Crawler
+        env:
+          MONGO_URI: ${{ secrets.MONGO_URI }} 
+        run: |
+          python crawl_vietnamworks.py
+          python crawl_topcv.py

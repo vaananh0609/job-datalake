@@ -1,0 +1,14 @@
+version: '3'
+services:
+  minio:
+    image: minio/minio
+    container_name: datalake_minio
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    volumes:
+      - "E:/minio_data:/data"  
+    environment:
+      MINIO_ROOT_USER: "minioadmin"
+      MINIO_ROOT_PASSWORD: "minioadmin"
+    command: server /data --console-address ":9001"
