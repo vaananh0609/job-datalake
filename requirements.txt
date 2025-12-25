@@ -3,3 +3,5 @@ requests
 minio
 playwright
 oci
+python-dotenv
+boto3

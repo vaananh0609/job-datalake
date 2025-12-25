@@ -1,0 +1,33 @@
+name: Data Pipeline (Mongo -> S3)
+
+on:
+  schedule:
+    # Chạy lúc 4:00 AM VN (21:00 UTC hôm trước)
+    - cron: '0 21 * * *'
+  workflow_dispatch:
+
+jobs:
+  sync-to-s3:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install pymongo boto3
+
+    - name: Run ETL Script
+      env:
+        MONGO_URI: ${{ secrets.MONGO_URI }}
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        S3_BUCKET_NAME: ${{ secrets.S3_BUCKET_NAME }}
+        AWS_DEFAULT_REGION: ap-southeast-1  
+      run: python mongo_to_s3.py
