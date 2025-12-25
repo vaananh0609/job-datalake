@@ -13,7 +13,7 @@ from playwright.async_api import async_playwright, TimeoutError
 
 # Cấu hình URL gốc của Joboko (listing jobs dùng nút "Xem thêm việc làm")
 BASE_URL = "https://vn.joboko.com/jobs"
-MAX_SCROLL_ROUNDS = 1000  # số vòng scroll/load-more để lấy thêm jobs
+MAX_SCROLL_ROUNDS = 100  # số vòng scroll/load-more để lấy thêm jobs
 USER_DATA_DIR = os.path.abspath("browser_profile_joboko")
 MAX_LINKS_PER_PAGE = 50  # số job tối đa xử lý mỗi vòng scroll
 REQUEST_DELAY_RANGE = (0.6, 1.4)  # delay giữa các truy vấn chi tiết
@@ -198,7 +198,7 @@ async def crawl_joboko():
     # 1. Kết nối DB
     try:
         db = get_database()
-        collection = db["raw_joboko"]
+        collection = db["raw_joboko_test"]
     except Exception as e:
         print(f"❌ Lỗi kết nối Database: {e}")
         return
