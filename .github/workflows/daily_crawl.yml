@@ -2,7 +2,7 @@ name: Daily Job Crawler
 
 on:
   schedule:
-    - cron: '0 1 * * *' # Chạy lúc 8:00 sáng VN hàng ngày
+    - cron: '0 18 * * *'
   workflow_dispatch: # Chạy thủ công để test
 
 jobs:
