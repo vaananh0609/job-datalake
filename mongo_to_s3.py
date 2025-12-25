@@ -15,10 +15,10 @@ def get_mongo_data():
     """Kết nối MongoDB và lấy dữ liệu"""
     try:
         client = MongoClient(MONGO_URI)
-        db = client["job_database"]  # Tên database của bạn
+        db = client["job_datalake_buffer"]  
         
         # Lấy từ 2 collection chính
-        collections = ["raw_jobs", "jobs_staging_2025"]
+        collections = ["raw_vietnamworks", "raw_joboko"] 
         data_buffers = {}
 
         for col_name in collections:
