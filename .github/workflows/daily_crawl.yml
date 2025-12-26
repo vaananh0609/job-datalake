@@ -14,7 +14,7 @@ jobs:
     strategy:
       fail-fast: false # Nếu 1 file lỗi/hết giờ, file kia vẫn chạy tiếp
       matrix:
-        script: [crawl_vietnamworks.py, crawl_joboko.py]
+        script: [crawl_vietnamworks.py, crawl_joboko.py, crawl_topcv.py]
 
     steps:
     - name: Checkout code
@@ -34,8 +34,8 @@ jobs:
         playwright install chromium
 
     - name: Run Crawler with Timeout
-      # Giới hạn 60 phút
-      timeout-minutes: 60 
+      # Giới hạn 90 phút
+      timeout-minutes: 90 
       env:
         MONGO_URI: ${{ secrets.MONGO_URI }}
       run: python ${{ matrix.script }}
