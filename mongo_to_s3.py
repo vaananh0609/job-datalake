@@ -17,8 +17,8 @@ def get_mongo_data():
         client = MongoClient(MONGO_URI)
         db = client["job_datalake_buffer"]  
         
-        # Lấy từ 2 collection chính
-        collections = ["raw_vietnamworks", "raw_joboko"] 
+        # Lấy từ 3 collection chính
+        collections = ["raw_vietnamworks", "raw_joboko", "raw_topcv"] 
         data_buffers = {}
 
         for col_name in collections:
