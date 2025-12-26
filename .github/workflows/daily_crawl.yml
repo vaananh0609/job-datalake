@@ -1,10 +1,9 @@
-name: 1AM Crawl (Max 1 Hour)
+name: 6AM Crawl (Max 1.5 Hour)
 
 on:
   schedule:
-    # 18:00 UTC = 01:00 Sáng Việt Nam (hôm sau)
-    - cron: '0 18 * * *'
-  # Có thể bấm nút chạy thử ngay lập tức nếu muốn
+    # VD: 18:00 UTC = 01:00 Sáng Việt Nam
+    - cron: '0 23 * * *'
   workflow_dispatch:
 
 jobs:
