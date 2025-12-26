@@ -4,6 +4,7 @@ from datetime import datetime
 import os
 import sys
 import re
+from typing import Optional
 
 # Thêm đường dẫn để import database
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -27,7 +28,7 @@ DETAIL_RETRIES = 2
 LOAD_MORE_WAIT_MS = 15000
 
 
-def joboko_job_id(job_url: str) -> str | None:
+def joboko_job_id(job_url: str) -> Optional[str]:
     # Example: https://vn.joboko.com/viec-lam-...-xvi6228392
     m = re.search(r"-xvi(\d+)(?:$|[?#])", job_url)
     if m:
