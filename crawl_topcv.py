@@ -120,7 +120,7 @@ async def crawl_topcv_clean_final():
     async with async_playwright() as p:
         context = await p.chromium.launch_persistent_context(
             user_data_dir=USER_DATA_DIR,
-            headless=False,
+            headless=True,
             args=[
                 "--disable-blink-features=AutomationControlled",
                 "--no-sandbox"
