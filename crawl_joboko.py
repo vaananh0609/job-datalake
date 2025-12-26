@@ -208,7 +208,7 @@ async def crawl_joboko():
     async with async_playwright() as p:
         context = await p.chromium.launch_persistent_context(
             user_data_dir=USER_DATA_DIR,
-            headless=False, # Để False để theo dõi quá trình chạy
+            headless=True, # Để False để theo dõi quá trình chạy
             args=["--disable-blink-features=AutomationControlled"],
             viewport={"width": 1280, "height": 800}
         )
