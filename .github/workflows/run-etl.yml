@@ -43,5 +43,5 @@ jobs:
             python etl_job.py --s3-path "$S3_PATH" --endpoint "https://s3.amazonaws.com"
           else
             echo "Running full ETL: transform and write parquet (ensure process_jobs.py exists and configured)"
-            python process_jobs.py --s3-bucket "$S3_BUCKET_NAME" --s3-prefix "$S3_PREFIX" --mode overwrite
+            python etl_job.py --s3-bucket "$S3_BUCKET_NAME" --s3-prefix "$S3_PREFIX" --mode overwrite
           fi
