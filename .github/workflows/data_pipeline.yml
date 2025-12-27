@@ -2,9 +2,8 @@ name: Data Pipeline (Mongo -> S3)
 
 on:
   schedule:
-    # Chạy lúc 8:00 AM VN (1:00 UTC)
-    # Chạy lúc 8:00 AM VN (1:00 UTC) vào các ngày 1,11,21
-    - cron: '0 1 1,11,21 * *'
+  # Chạy lúc 8:00 AM VN (1:00 UTC) vào các ngày 1,11,21
+  - cron: '0 1 1,11,21 * *'
   workflow_dispatch:
 
 jobs:
