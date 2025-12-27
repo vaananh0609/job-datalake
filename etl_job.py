@@ -6,6 +6,15 @@ from typing import Tuple
 
 import boto3
 from pyspark.sql import SparkSession
+from pyspark.sql.functions import (
+    col,
+    when,
+    lit,
+    explode,
+    regexp_replace,
+    to_date
+)
+from pyspark.sql.types import StringType
 
 LOG = logging.getLogger("etl_job")
 
@@ -16,7 +25,7 @@ LOG = logging.getLogger("etl_job")
 def build_spark(endpoint: str | None, path_style_access: bool, region: str | None):
     builder = (
         SparkSession.builder
-        .appName("Test S3A Connection")
+        .appName("TopCV ETL S3A")
 
         # Hadoop AWS
         .config(
@@ -28,20 +37,17 @@ def build_spark(endpoint: str | None, path_style_access: bool, region: str | Non
             "org.apache.hadoop.fs.s3a.S3AFileSystem"
         )
 
-        # ---- FIX BUG "24h" ----
-        # Hadoop expects milliseconds (NUMBER), not duration string
+        # ---- S3A SAFE CONFIG ----
         .config("spark.hadoop.fs.s3a.multipart.purge", "false")
         .config("spark.hadoop.fs.s3a.multipart.purge.age", "86400000")
 
-        # ---- Numeric-only configs ----
         .config("spark.hadoop.fs.s3a.connection.maximum", "100")
         .config("spark.hadoop.fs.s3a.connection.timeout", "60000")
         .config("spark.hadoop.fs.s3a.connection.establish.timeout", "60000")
-        .config("spark.hadoop.fs.s3a.threads.keepalivetime", "60000")
         .config("spark.hadoop.fs.s3a.threads.max", "50")
         .config("spark.hadoop.fs.s3a.retry.limit", "3")
 
-        # ---- Credentials provider (AWS SDK v1) ----
+        # ---- Credentials provider ----
         .config(
             "spark.hadoop.fs.s3a.aws.credentials.provider",
             "org.apache.hadoop.fs.s3a.SimpleAWSCredentialsProvider"
@@ -109,6 +115,9 @@ def find_latest_ymd_prefix(bucket: str, prefix: str, region: str | None):
         return [cp["Prefix"] for p in pages for cp in p.get("CommonPrefixes", [])]
 
     years = list_prefix(prefix)
+    if not years:
+        raise RuntimeError("Không tìm thấy dữ liệu trong prefix")
+
     y = sorted(y.rstrip("/").split("/")[-1] for y in years)[-1]
 
     months = list_prefix(f"{prefix}{y}/")
@@ -129,8 +138,8 @@ def main():
     parser.add_argument("--endpoint", default=None)
     parser.add_argument("--path-style-access", action="store_true")
     parser.add_argument("--region", default=os.environ.get("AWS_REGION"))
-    parser.add_argument("--write-output", action="store_true", help="Write transformed Parquet to S3")
-    parser.add_argument("--out-prefix", default="processed", help="Output prefix under bucket, e.g. processed/")
+    parser.add_argument("--write-output", action="store_true")
+    parser.add_argument("--out-prefix", default="processed")
     args = parser.parse_args()
 
     spark = build_spark(args.endpoint, args.path_style_access, args.region)
@@ -147,56 +156,72 @@ def main():
 
     df = spark.read.option("multiline", "true").json(read_path)
     df.printSchema()
+
     total = df.count()
     print(f"✅ CONNECT OK | Rows = {total}")
 
-    # -------------------------
-    # Transform: jobs_fact
-    # -------------------------
+    # =========================
+    # TRANSFORM: jobs_fact
+    # =========================
     def parse_salary(col_name):
         if col_name in df.columns:
             return regexp_replace(col(col_name).cast("string"), "[^0-9.]", "").cast("double")
-        else:
-            return lit(None)
+        return lit(0.0)
 
-    salary_min_expr = parse_salary("salaryMin")
-    salary_max_expr = parse_salary("salaryMax")
+    salary_min = parse_salary("salaryMin")
+    salary_max = parse_salary("salaryMax")
 
-    df_jobs = df.select(
-        col("jobId").cast("string").alias("job_id"),
-        col("jobTitle").alias("job_title"),
-        col("companyName").alias("company_name"),
-        col("locationV2.cityName").alias("city"),
-        when(salary_min_expr.isNull(), lit(0)).otherwise(salary_min_expr).alias("salary_min"),
-        when(salary_max_expr.isNull(), lit(0)).otherwise(salary_max_expr).alias("salary_max"),
-        to_date(col("approvedOn")).alias("posted_date")
+    df_jobs = (
+        df.select(
+            col("jobId").cast("string").alias("job_id"),
+            col("jobTitle").alias("job_title"),
+            col("companyName").alias("company_name"),
+            col("locationV2.cityName").alias("city"),
+            when(salary_min.isNull(), lit(0)).otherwise(salary_min).alias("salary_min"),
+            when(salary_max.isNull(), lit(0)).otherwise(salary_max).alias("salary_max"),
+            to_date(col("approvedOn")).alias("posted_date"),
+        )
+        .withColumn("salary_avg", (col("salary_min") + col("salary_max")) / 2)
     )
-    df_jobs = df_jobs.withColumn("salary_avg", (col("salary_min") + col("salary_max")) / 2)
 
-    # -------------------------
-    # Transform: job_skills
-    # -------------------------
+    # =========================
+    # TRANSFORM: job_skills
+    # =========================
     if "skills" in df.columns:
-        exploded = df.select(col("jobId").cast("string").alias("job_id"), explode(col("skills")).alias("skill_obj"))
-        skill_name = when(col("skill_obj").cast(StringType()).isNotNull(), col("skill_obj").cast(StringType())).otherwise(col("skill_obj.skillName"))
-        df_skills = exploded.select(col("job_id"), skill_name.alias("skill_name")).where(col("skill_name").isNotNull())
-    else:
-        df_skills = spark.createDataFrame([], schema="job_id string, skill_name string")
+        exploded = df.select(
+            col("jobId").cast("string").alias("job_id"),
+            explode(col("skills")).alias("skill_obj")
+        )
 
-    # -------------------------
-    # Write outputs (Parquet) if requested
-    # -------------------------
+        skill_name = when(
+            col("skill_obj").cast(StringType()).isNotNull(),
+            col("skill_obj").cast(StringType())
+        ).otherwise(col("skill_obj.skillName"))
+
+        df_skills = (
+            exploded
+            .select(col("job_id"), skill_name.alias("skill_name"))
+            .where(col("skill_name").isNotNull())
+        )
+    else:
+        df_skills = spark.createDataFrame([], "job_id string, skill_name string")
+
+    # =========================
+    # WRITE OUTPUT
+    # =========================
     if args.write_output:
-        out_prefix = args.out_prefix.rstrip('/')
+        out_prefix = args.out_prefix.rstrip("/")
+
         jobs_path = f"s3a://{bucket}/{out_prefix}/jobs_fact/"
         skills_path = f"s3a://{bucket}/{out_prefix}/job_skills/"
 
-        print(f"Ghi jobs_fact -> {jobs_path}")
+        print(f"📝 Write jobs_fact -> {jobs_path}")
         df_jobs.write.mode("overwrite").option("compression", "snappy").parquet(jobs_path)
 
-        print(f"Ghi job_skills -> {skills_path}")
+        print(f"📝 Write job_skills -> {skills_path}")
         df_skills.write.mode("overwrite").option("compression", "snappy").parquet(skills_path)
-        print("GHI XONG! Parquet đã được lưu vào S3.")
+
+        print("✅ WRITE SUCCESS")
 
     spark.stop()
 
