@@ -23,7 +23,7 @@ LOG = logging.getLogger("etl_job")
 # SPARK BUILDER (SAFE)
 # =========================
 def build_spark(endpoint: str | None, path_style_access: bool, region: str | None):
-    builder = (
+    spark = (
         SparkSession.builder
         .appName("TopCV ETL S3A")
 
@@ -37,50 +37,45 @@ def build_spark(endpoint: str | None, path_style_access: bool, region: str | Non
             "org.apache.hadoop.fs.s3a.S3AFileSystem"
         )
 
-        # ---- S3A SAFE CONFIG ----
+        # ===== BẮT BUỘC: MILLISECONDS =====
+        .config("spark.hadoop.fs.s3a.connection.timeout", "60000")
+        .config("spark.hadoop.fs.s3a.connection.establish.timeout", "60000")
+        .config("spark.hadoop.fs.s3a.threads.keepalivetime", "60000")
         .config("spark.hadoop.fs.s3a.multipart.purge", "false")
         .config("spark.hadoop.fs.s3a.multipart.purge.age", "86400000")
 
         .config("spark.hadoop.fs.s3a.connection.maximum", "100")
-        .config("spark.hadoop.fs.s3a.connection.timeout", "60000")
-        .config("spark.hadoop.fs.s3a.connection.establish.timeout", "60000")
         .config("spark.hadoop.fs.s3a.threads.max", "50")
         .config("spark.hadoop.fs.s3a.retry.limit", "3")
 
-        # ---- Credentials provider ----
+        # Credentials
         .config(
             "spark.hadoop.fs.s3a.aws.credentials.provider",
             "org.apache.hadoop.fs.s3a.SimpleAWSCredentialsProvider"
         )
     )
 
-    # =========================
-    # CREDENTIALS
-    # =========================
+    # ===== Credentials từ env =====
     ak = os.environ.get("AWS_ACCESS_KEY_ID")
     sk = os.environ.get("AWS_SECRET_ACCESS_KEY")
-
     if ak and sk:
-        builder = (
-            builder
+        spark = (
+            spark
             .config("spark.hadoop.fs.s3a.access.key", ak)
             .config("spark.hadoop.fs.s3a.secret.key", sk)
         )
 
-    # =========================
-    # REGION / ENDPOINT
-    # =========================
+    # ===== Region / Endpoint =====
     if region:
-        builder = builder.config("spark.hadoop.fs.s3a.region", region)
+        spark = spark.config("spark.hadoop.fs.s3a.region", region)
 
     if endpoint:
-        builder = builder.config("spark.hadoop.fs.s3a.endpoint", endpoint)
+        spark = spark.config("spark.hadoop.fs.s3a.endpoint", endpoint)
 
     if path_style_access:
-        builder = builder.config("spark.hadoop.fs.s3a.path.style.access", "true")
+        spark = spark.config("spark.hadoop.fs.s3a.path.style.access", "true")
 
-    return builder.getOrCreate()
-
+    return spark.getOrCreate()
 
 # =========================
 # S3 PATH PARSER
