@@ -1,0 +1,12 @@
+2025/12/25-17:21:22.222 4d94 Reusing MANIFEST E:\DATN\JobDataLake\browser_profile_topcv\Default\Session Storage/MANIFEST-000001
+2025/12/25-17:21:22.224 4d94 Recovering log #27
+2025/12/25-17:21:22.226 4d94 Reusing old log E:\DATN\JobDataLake\browser_profile_topcv\Default\Session Storage/000027.log 
+2025/12/25-17:22:56.611 479c Level-0 table #32: started
+2025/12/25-17:22:56.619 479c Level-0 table #32: 13921 bytes OK
+2025/12/25-17:22:56.627 479c Delete type=0 #27
+2025/12/25-17:24:43.163 4d94 Level-0 table #34: started
+2025/12/25-17:24:43.175 4d94 Level-0 table #34: 13422 bytes OK
+2025/12/25-17:24:43.177 4d94 Delete type=0 #31
+2025/12/25-17:26:46.247 479c Level-0 table #36: started
+2025/12/25-17:26:46.254 479c Level-0 table #36: 13337 bytes OK
+2025/12/25-17:26:46.255 479c Delete type=0 #33

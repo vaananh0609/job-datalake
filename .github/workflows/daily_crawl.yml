@@ -1,0 +1,41 @@
+name: 6AM Crawl (Max 1.5 Hour)
+
+on:
+  schedule:
+    # Chạy vào các ngày 1, 11, 21 hàng tháng (khoảng 10 ngày/lần)
+    # Lưu ý: cron định nghĩa theo UTC; '0 23' = 06:00 giờ VN vào ngày tiếp theo
+    - cron: '0 23 1,11,21 * *'
+  workflow_dispatch:
+
+jobs:
+  run-crawlers:
+    runs-on: ubuntu-latest
+    # Cấu hình Matrix để chạy song song 2 file cùng lúc
+    strategy:
+      fail-fast: false # Nếu 1 file lỗi/hết giờ, file kia vẫn chạy tiếp
+      matrix:
+        script: [crawl_vietnamworks.py, crawl_joboko.py, crawl_topcv.py]
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+
+    - name: Install libraries
+      run: |
+        python -m pip install --upgrade pip
+        # Cài các thư viện cần thiết dựa trên code của bạn
+        pip install requests pymongo playwright python-dotenv
+        # Cài trình duyệt cho Playwright (cần cho file TopCV)
+        playwright install chromium
+
+    - name: Run Crawler with Timeout
+      # Giới hạn 90 phút
+      timeout-minutes: 90 
+      env:
+        MONGO_URI: ${{ secrets.MONGO_URI }}
+      run: python ${{ matrix.script }}

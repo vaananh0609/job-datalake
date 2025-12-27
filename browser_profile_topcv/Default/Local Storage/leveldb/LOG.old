@@ -1,0 +1,6 @@
+2025/12/25-17:16:13.898 758 Reusing MANIFEST E:\DATN\JobDataLake\browser_profile_topcv\Default\Local Storage\leveldb/MANIFEST-000001
+2025/12/25-17:16:13.916 758 Recovering log #13
+2025/12/25-17:16:13.919 758 Reusing old log E:\DATN\JobDataLake\browser_profile_topcv\Default\Local Storage\leveldb/000013.log 
+2025/12/25-17:19:14.200 758 Level-0 table #18: started
+2025/12/25-17:19:14.209 758 Level-0 table #18: 23767 bytes OK
+2025/12/25-17:19:14.215 758 Delete type=0 #13
