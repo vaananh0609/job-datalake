@@ -20,6 +20,10 @@ Gợi ý:
 import argparse
 import logging
 import os
+import re
+from typing import Tuple
+
+import boto3
 
 from pyspark.sql import SparkSession
 
@@ -52,6 +56,64 @@ def build_spark(endpoint: str | None, path_style_access: bool, region: str | Non
     return builder.getOrCreate()
 
 
+def parse_s3_path(s3_path: str) -> Tuple[str, str]:
+    """Parse s3a://bucket/key... -> (bucket, key_prefix) without leading slash"""
+    if s3_path.startswith("s3a://"):
+        body = s3_path[len("s3a://"):]
+    elif s3_path.startswith("s3://"):
+        body = s3_path[len("s3://"):]
+    else:
+        raise ValueError("s3_path must start with s3a:// or s3://")
+    parts = body.split('/', 1)
+    bucket = parts[0]
+    key = '' if len(parts) == 1 else parts[1]
+    # ensure prefix ends with /
+    if key and not key.endswith('/'):
+        # if looks like a file (endswith .json), keep as-is
+        if not re.search(r"\.(json|parquet)$", key):
+            key = key + '/'
+    return bucket, key
+
+
+def find_latest_ymd_prefix(bucket: str, prefix: str, aws_region: str | None = None) -> str:
+    """Find latest YYYY/MM/DD/ prefix under given prefix. Returns full prefix (with trailing slash).
+    Uses S3 common-prefixes listing by levels (year -> month -> day)."""
+    session_kwargs = {}
+    if aws_region:
+        session_kwargs['region_name'] = aws_region
+    s3 = boto3.client('s3', **session_kwargs)
+
+    def list_common_prefixes(pfx: str):
+        paginator = s3.get_paginator('list_objects_v2')
+        pages = paginator.paginate(Bucket=bucket, Prefix=pfx, Delimiter='/')
+        prefixes = []
+        for page in pages:
+            for cp in page.get('CommonPrefixes', []):
+                prefixes.append(cp.get('Prefix'))
+        return prefixes
+
+    # level 1: years
+    years = list_common_prefixes(prefix)
+    if not years:
+        raise FileNotFoundError(f'No year prefixes found under s3://{bucket}/{prefix}')
+    latest_year = sorted([y.rstrip('/').split('/')[-1] for y in years])[-1]
+    year_prefix = prefix + latest_year + '/'
+
+    months = list_common_prefixes(year_prefix)
+    if not months:
+        raise FileNotFoundError(f'No month prefixes under {year_prefix}')
+    latest_month = sorted([m.rstrip('/').split('/')[-1] for m in months])[-1]
+    month_prefix = year_prefix + latest_month + '/'
+
+    days = list_common_prefixes(month_prefix)
+    if not days:
+        raise FileNotFoundError(f'No day prefixes under {month_prefix}')
+    latest_day = sorted([d.rstrip('/').split('/')[-1] for d in days])[-1]
+    day_prefix = month_prefix + latest_day + '/'
+
+    return day_prefix
+
+
 def main():
     parser = argparse.ArgumentParser(description="Test Spark read JSON from S3 via s3a")
     parser.add_argument("--s3-path", required=True, help="Ví dụ: s3a://bucket/raw_data/jobs_data.json")
@@ -62,9 +124,34 @@ def main():
 
     spark = build_spark(endpoint=args.endpoint, path_style_access=args.path_style_access, region=args.region)
 
-    LOG.info("Đang thử đọc dữ liệu từ: %s", args.s3_path)
+    # If args.s3_path is a prefix (ends with /) or doesn't point to a json file,
+    # try to resolve the latest YYYY/MM/DD/ subfolder.
+    s3_path = args.s3_path
     try:
-        df = spark.read.option("multiline", "true").json(args.s3_path)
+        bucket, key = parse_s3_path(s3_path)
+    except ValueError as e:
+        print("LOI: s3_path không hợp lệ:", e)
+        raise
+
+    if not re.search(r"\.(json|parquet)$", key):
+        # treat as base prefix -> find latest date partition
+        try:
+            latest_suffix = find_latest_ymd_prefix(bucket, key, aws_region=args.region)
+            full_key = latest_suffix
+            full_s3a = f"s3a://{bucket}/{full_key}"
+            LOG.info("Resolved latest daily prefix: %s", full_s3a)
+            # try to read any .json under this prefix by using wildcard
+            read_path = full_s3a + "*.json"
+        except Exception as e:
+            print("LOI khi tim folder ngay moi nhat:", e)
+            spark.stop()
+            raise
+    else:
+        read_path = s3_path
+
+    LOG.info("Đang thử đọc dữ liệu từ: %s", read_path)
+    try:
+        df = spark.read.option("multiline", "true").json(read_path)
         df.printSchema()
         print("KET NOI THANH CONG! :D")
         print(f"So dong (count) = {df.count()}")
