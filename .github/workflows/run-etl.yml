@@ -1,0 +1,45 @@
+name: Run ETL Job
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: 'run mode (dry-run or full)'
+        required: false
+        default: 'dry-run'
+
+jobs:
+  run-etl:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run ETL (dry-run or full)
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: ${{ secrets.AWS_REGION }}
+          S3_BUCKET: ${{ secrets.S3_BUCKET }}
+          S3_PREFIX: ${{ secrets.S3_PREFIX }}
+        run: |
+          set -e
+          MODE="${{ github.event.inputs.mode }}"
+          S3_PATH="s3a://${S3_BUCKET}/${S3_PREFIX}"
+          if [ "$MODE" = "dry-run" ]; then
+            echo "Running dry-run: only read and print schema/count"
+            python etl_job.py --s3-path "$S3_PATH" --endpoint "https://s3.amazonaws.com"
+          else
+            echo "Running full ETL: transform and write parquet (ensure process_jobs.py exists and configured)"
+            python process_jobs.py --s3-bucket "$S3_BUCKET" --s3-prefix "$S3_PREFIX" --mode overwrite
+          fi
