@@ -30,16 +30,18 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_REGION: ${{ secrets.AWS_REGION }}
-          S3_BUCKET: ${{ secrets.S3_BUCKET }}
+          S3_BUCKET_NAME: ${{ secrets.S3_BUCKET_NAME }}
           S3_PREFIX: ${{ secrets.S3_PREFIX }}
         run: |
           set -e
           MODE="${{ github.event.inputs.mode }}"
-          S3_PATH="s3a://${S3_BUCKET}/${S3_PREFIX}"
+          # fallback prefix nếu secret S3_PREFIX chưa được thiết lập
+          S3_PREFIX="${S3_PREFIX:-raw_data/jobs/}"
+          S3_PATH="s3a://${S3_BUCKET_NAME}/${S3_PREFIX}"
           if [ "$MODE" = "dry-run" ]; then
             echo "Running dry-run: only read and print schema/count"
             python etl_job.py --s3-path "$S3_PATH" --endpoint "https://s3.amazonaws.com"
           else
             echo "Running full ETL: transform and write parquet (ensure process_jobs.py exists and configured)"
-            python process_jobs.py --s3-bucket "$S3_BUCKET" --s3-prefix "$S3_PREFIX" --mode overwrite
+            python process_jobs.py --s3-bucket "$S3_BUCKET_NAME" --s3-prefix "$S3_PREFIX" --mode overwrite
           fi
