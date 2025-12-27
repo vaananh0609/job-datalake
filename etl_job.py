@@ -44,6 +44,11 @@ def build_spark(endpoint: str | None, path_style_access: bool, region: str | Non
         builder = builder.config("spark.hadoop.fs.s3a.access.key", access_key)
         builder = builder.config("spark.hadoop.fs.s3a.secret.key", secret_key)
 
+    # Force S3A to use the SimpleAWSCredentialsProvider (provided by hadoop-aws)
+    # This avoids trying to load AWS SDK v2 providers (software.amazon.awssdk.*)
+    # which are not on the classpath when using aws-java-sdk-bundle (v1).
+    builder = builder.config("spark.hadoop.fs.s3a.aws.credentials.provider", "org.apache.hadoop.fs.s3a.SimpleAWSCredentialsProvider")
+
     if region:
         builder = builder.config("spark.hadoop.fs.s3a.region", region)
 
