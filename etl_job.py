@@ -12,12 +12,12 @@ from pyspark.sql.functions import (
     lit,
     explode,
     regexp_replace,
-    to_date
+    to_date,
+    array_join
 )
 from pyspark.sql.types import StringType
 
 LOG = logging.getLogger("etl_job")
-
 
 # =========================
 # SPARK BUILDER (SAFE)
@@ -37,7 +37,7 @@ def build_spark(endpoint: str | None, path_style_access: bool, region: str | Non
             "org.apache.hadoop.fs.s3a.S3AFileSystem"
         )
 
-        # ===== BẮT BUỘC: MILLISECONDS =====
+        # ===== BẮT BUỘC: CHỈ DÙNG SỐ (ms) =====
         .config("spark.hadoop.fs.s3a.connection.timeout", "60000")
         .config("spark.hadoop.fs.s3a.connection.establish.timeout", "60000")
         .config("spark.hadoop.fs.s3a.threads.keepalivetime", "60000")
@@ -48,7 +48,7 @@ def build_spark(endpoint: str | None, path_style_access: bool, region: str | Non
         .config("spark.hadoop.fs.s3a.threads.max", "50")
         .config("spark.hadoop.fs.s3a.retry.limit", "3")
 
-        # Credentials
+        # Credentials provider (AWS SDK v1)
         .config(
             "spark.hadoop.fs.s3a.aws.credentials.provider",
             "org.apache.hadoop.fs.s3a.SimpleAWSCredentialsProvider"
@@ -97,7 +97,6 @@ def parse_s3_path(s3_path: str) -> Tuple[str, str]:
 
     return bucket, key
 
-
 # =========================
 # FIND LATEST YYYY/MM/DD
 # =========================
@@ -122,7 +121,6 @@ def find_latest_ymd_prefix(bucket: str, prefix: str, region: str | None):
     d = sorted(d.rstrip("/").split("/")[-1] for d in days)[-1]
 
     return f"{prefix}{y}/{m}/{d}/"
-
 
 # =========================
 # MAIN
@@ -160,7 +158,11 @@ def main():
     # =========================
     def parse_salary(col_name):
         if col_name in df.columns:
-            return regexp_replace(col(col_name).cast("string"), "[^0-9.]", "").cast("double")
+            return regexp_replace(
+                col(col_name).cast("string"),
+                "[^0-9.]",
+                ""
+            ).cast("double")
         return lit(0.0)
 
     salary_min = parse_salary("salaryMin")
@@ -171,12 +173,25 @@ def main():
             col("jobId").cast("string").alias("job_id"),
             col("jobTitle").alias("job_title"),
             col("companyName").alias("company_name"),
-            col("locationV2.cityName").alias("city"),
+
+            # ✅ FIX LOCATION (TopCV schema)
+            when(
+                col("cities").isNotNull(),
+                array_join(col("cities"), ", ")
+            ).otherwise(
+                array_join(col("workingLocations"), ", ")
+            ).alias("city"),
+
             when(salary_min.isNull(), lit(0)).otherwise(salary_min).alias("salary_min"),
             when(salary_max.isNull(), lit(0)).otherwise(salary_max).alias("salary_max"),
-            to_date(col("approvedOn")).alias("posted_date"),
+
+            # ✅ FIX DATE FIELD
+            to_date(col("postedDate")).alias("posted_date"),
         )
-        .withColumn("salary_avg", (col("salary_min") + col("salary_max")) / 2)
+        .withColumn(
+            "salary_avg",
+            (col("salary_min") + col("salary_max")) / 2
+        )
     )
 
     # =========================
@@ -191,7 +206,7 @@ def main():
         skill_name = when(
             col("skill_obj").cast(StringType()).isNotNull(),
             col("skill_obj").cast(StringType())
-        ).otherwise(col("skill_obj.skillName"))
+        )
 
         df_skills = (
             exploded
@@ -219,7 +234,6 @@ def main():
         print("✅ WRITE SUCCESS")
 
     spark.stop()
-
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
