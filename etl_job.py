@@ -53,6 +53,16 @@ def build_spark(endpoint: str | None, path_style_access: bool, region: str | Non
     if path_style_access:
         builder = builder.config("spark.hadoop.fs.s3a.path.style.access", "true")
 
+    # Workaround: enforce numeric timeouts / thread settings to avoid
+    # NumberFormatException when Hadoop config contains values like "60s".
+    # These keys are set as numeric milliseconds or integer counts.
+    builder = builder.config("spark.hadoop.fs.s3a.connection.maximum", "100")
+    builder = builder.config("spark.hadoop.fs.s3a.connection.timeout", "60000")
+    builder = builder.config("spark.hadoop.fs.s3a.connection.establish.timeout", "60000")
+    builder = builder.config("spark.hadoop.fs.s3a.threads.keepalivetime", "60000")
+    builder = builder.config("spark.hadoop.fs.s3a.threads.max", "50")
+    builder = builder.config("spark.hadoop.fs.s3a.retry.limit", "3")
+
     return builder.getOrCreate()
 
 
