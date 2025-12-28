@@ -40,10 +40,25 @@ jobs:
           S3_ENDPOINT: ${{ secrets.S3_ENDPOINT }}
         run: |
           set -e
-          # derive s3 path
-          S3_PREFIX="${S3_PREFIX:-processed}"
+        
+          export S3_BUCKET_NAME="${S3_BUCKET_NAME}"
+          export S3_PREFIX="${S3_PREFIX:-processed}"
+          export AWS_REGION="${AWS_REGION:-}"
+        
+          if [ -z "$S3_BUCKET_NAME" ]; then
+            echo "❌ S3_BUCKET_NAME is EMPTY"
+            exit 1
+          fi
+        
           S3_PATH="s3a://${S3_BUCKET_NAME}/${S3_PREFIX}/jobs_fact/"
           MODEL_OUT="s3a://${S3_BUCKET_NAME}/models/salary_prediction_model"
-          echo "Reading parquet from: $S3_PATH"
-          echo "Model output: $MODEL_OUT"
-          python train_model.py --s3-path "$S3_PATH" --model-output "$MODEL_OUT" --endpoint "${S3_ENDPOINT:-}" --region "${AWS_REGION:-}"
+        
+          echo "✅ Reading parquet from: $S3_PATH"
+          echo "✅ Model output: $MODEL_OUT"
+        
+          python train_model.py \
+            --s3-path "$S3_PATH" \
+            --model-output "$MODEL_OUT" \
+            --endpoint "${S3_ENDPOINT:-}" \
+            --region "${AWS_REGION:-}"
+
