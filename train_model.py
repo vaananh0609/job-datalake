@@ -38,6 +38,11 @@ def build_spark():
         .config("spark.hadoop.fs.s3a.retry.limit", "3")
         .config("spark.hadoop.fs.s3a.retry.interval", "1000")
         .config("spark.hadoop.fs.s3a.threads.max", "10")
+        .config("spark.hadoop.fs.s3a.connection.maximum", "100")
+        .config("spark.hadoop.fs.s3a.connection.request.timeout", "60000")
+        .config("spark.hadoop.fs.s3a.socket.timeout", "60000")
+        .config("spark.hadoop.fs.s3a.connection.ttl", "0")
+        .config("spark.hadoop.fs.s3a.idle.connection.timeout", "60000")
 
         # ===== STABILITY =====
         .config("spark.sql.files.ignoreCorruptFiles", "true")
@@ -71,6 +76,8 @@ def main():
     # ===== ENV =====
     bucket = os.environ.get("S3_BUCKET_NAME")
     prefix = os.environ.get("S3_PREFIX")
+    endpoint = os.environ.get("S3_ENDPOINT")
+    region = os.environ.get("AWS_REGION")
 
 
     if not bucket or not prefix:
@@ -83,6 +90,13 @@ def main():
     print(f"💾 Model output: {model_output}")
 
     spark = build_spark()
+
+    # Apply endpoint/region if provided
+    hadoop_conf = spark.sparkContext._jsc.hadoopConfiguration()
+    if endpoint:
+        hadoop_conf.set("fs.s3a.endpoint", endpoint)
+    if region:
+        hadoop_conf.set("fs.s3a.region", region)
 
     # ===== READ DATA =====
     df = spark.read.parquet(read_path)
