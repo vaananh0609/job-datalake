@@ -1,5 +1,6 @@
 import logging
 import os
+import re
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import col
 from pyspark.ml import Pipeline
@@ -97,6 +98,36 @@ def main():
         hadoop_conf.set("fs.s3a.endpoint", endpoint)
     if region:
         hadoop_conf.set("fs.s3a.region", region)
+
+    # Detect and normalize S3A timeout values that may be expressed with units
+    # (some environments set values like '60s' which Hadoop's longOption can't parse)
+    candidate_keys = [
+        "fs.s3a.connection.timeout",
+        "fs.s3a.connection.establish.timeout",
+        "fs.s3a.threads.keepalivetime",
+        "fs.s3a.multipart.purge.age",
+        "fs.s3a.connection.maximum",
+        "fs.s3a.socket.timeout",
+        "fs.s3a.connection.request.timeout",
+        "fs.s3a.idle.connection.timeout",
+    ]
+
+    for key in candidate_keys:
+        try:
+            val = hadoop_conf.get(key)
+            if val and re.match(r"^\d+s$", val):
+                # convert '60s' -> '60000' (milliseconds)
+                ms = str(int(val[:-1]) * 1000)
+                hadoop_conf.set(key, ms)
+                LOG.info("Normalized %s: %s -> %s", key, val, ms)
+            elif val and re.match(r"^\d+m$", val):
+                # '1m' -> 60000
+                ms = str(int(val[:-1]) * 60 * 1000)
+                hadoop_conf.set(key, ms)
+                LOG.info("Normalized %s: %s -> %s", key, val, ms)
+        except Exception:
+            # don't fail startup for diagnostic code
+            LOG.debug("Could not normalize key %s", key, exc_info=True)
 
     # ===== READ DATA =====
     df = spark.read.parquet(read_path)
