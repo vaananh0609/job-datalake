@@ -1,5 +1,6 @@
 import logging
 import os
+import re
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import col
 from pyspark.ml import Pipeline
@@ -89,6 +90,35 @@ def main():
     # ===== READ DATA =====
     df = spark.read.parquet(read_path)
 
+    # ===== SANITIZE COLUMN NAMES =====
+    def sanitize_column_names(df):
+        cols = df.columns
+        mapping = []
+        for c in cols:
+            new = c.strip() if c is not None else ""
+            if new == "":
+                mapping.append((c, None))
+                continue
+            # replace chars not allowed in identifiers with underscore
+            safe = re.sub(r"[^0-9A-Za-z_]+", "_", new)
+            if safe != c:
+                mapping.append((c, safe))
+
+        # Drop empty-name columns
+        for old, new in mapping:
+            if new is None:
+                LOG.warning("Dropping column with empty name: %r", old)
+                df = df.drop(old)
+            else:
+                LOG.info("Rename column: %s -> %s", old, new)
+                df = df.withColumnRenamed(old, new)
+        return df
+
+    try:
+        df = sanitize_column_names(df)
+    except Exception:
+        LOG.exception("Failed sanitizing column names")
+
     # ===== SALARY =====
     if "salary_avg" not in df.columns:
         if "salary_min" in df.columns and "salary_max" in df.columns:
@@ -144,7 +174,18 @@ def main():
     LOG.info("📊 Training rows: %d", train_df.count())
     LOG.info("🚀 Training model...")
 
-    model = pipeline.fit(train_df)
+    try:
+        model = pipeline.fit(train_df)
+    except Exception as exc:
+        LOG.exception("Model training failed: %s", exc)
+        try:
+            LOG.error("Dataframe columns: %s", df.columns)
+            LOG.error("Dataframe schema: %s", df.schema.simpleString())
+            LOG.error("Training sample (5 rows):")
+            train_df.show(5, truncate=False)
+        except Exception:
+            LOG.exception("Failed to log dataframe sample")
+        raise SystemExit("❌ Training failed — see logs for dataframe schema and sample")
 
     # ===== EVALUATE =====
     preds = model.transform(test_df)
