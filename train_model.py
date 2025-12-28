@@ -18,16 +18,33 @@ LOG = logging.getLogger("train_model")
 def build_spark(
     app_name: str = "SalaryPredictionML",
     endpoint: str | None = None,
-    region: str | None = None,
+    region: str | None = None
 ):
     builder = (
         SparkSession.builder
         .appName(app_name)
+
+        # Hadoop AWS
         .config("spark.jars.packages", "org.apache.hadoop:hadoop-aws:3.3.4")
         .config("spark.hadoop.fs.s3a.impl", "org.apache.hadoop.fs.s3a.S3AFileSystem")
+
+        # ===== BẮT BUỘC: milliseconds =====
+        .config("spark.hadoop.fs.s3a.connection.timeout", "60000")
+        .config("spark.hadoop.fs.s3a.connection.establish.timeout", "60000")
+        .config("spark.hadoop.fs.s3a.threads.keepalivetime", "60000")
+        .config("spark.hadoop.fs.s3a.connection.maximum", "100")
+        .config("spark.hadoop.fs.s3a.threads.max", "50")
+        .config("spark.hadoop.fs.s3a.retry.limit", "3")
+        .config("spark.hadoop.fs.s3a.multipart.purge", "false")
+        .config("spark.hadoop.fs.s3a.multipart.purge.age", "86400000")
+
+        # Credentials provider
+        .config(
+            "spark.hadoop.fs.s3a.aws.credentials.provider",
+            "org.apache.hadoop.fs.s3a.SimpleAWSCredentialsProvider"
+        )
     )
 
-    # Credentials
     ak = os.environ.get("AWS_ACCESS_KEY_ID")
     sk = os.environ.get("AWS_SECRET_ACCESS_KEY")
     if ak and sk:
@@ -41,14 +58,9 @@ def build_spark(
         builder = builder.config("spark.hadoop.fs.s3a.region", region)
 
     if endpoint:
-        builder = (
-            builder
-            .config("spark.hadoop.fs.s3a.endpoint", endpoint)
-            .config("spark.hadoop.fs.s3a.path.style.access", "true")
-        )
+        builder = builder.config("spark.hadoop.fs.s3a.endpoint", endpoint)
 
     return builder.getOrCreate()
-
 
 # =========================
 # COLUMN DETECTION
