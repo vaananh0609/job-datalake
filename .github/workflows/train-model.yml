@@ -1,17 +1,18 @@
-name: Train / Run Salary Model
+name: Train Salary Model
 
 on:
   workflow_dispatch:
     inputs:
       run_mode:
-        description: 'train or run'
+        description: 'train mode (train/run)'
         required: false
         default: 'train'
   schedule:
+    # optional: run monthly on day 1 at 01:00 UTC (adjust as needed)
     - cron: '0 1 1 * *'
 
 jobs:
-  job:
+  train:
     runs-on: ubuntu-latest
 
     steps:
@@ -26,34 +27,38 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install pyspark boto3 pandas pyarrow
+          pip install -r requirements.txt
 
-      - name: Run main pipeline
+      - name: Run training
+        if: ${{ github.event.inputs.run_mode == 'train' || github.event_name == 'schedule' }}
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_REGION: ${{ secrets.AWS_REGION }}
           S3_BUCKET_NAME: ${{ secrets.S3_BUCKET_NAME }}
+          S3_PREFIX: ${{ secrets.S3_PREFIX }}
           S3_ENDPOINT: ${{ secrets.S3_ENDPOINT }}
         run: |
           set -e
-
-          RUN_MODE="${{ github.event.inputs.run_mode }}"
-          RUN_MODE="${RUN_MODE:-train}"
-
-          S3_BUCKET_NAME="${S3_BUCKET_NAME}"
-          S3_PREFIX="processed"
-
-          INPUT_PATH="s3a://${S3_BUCKET_NAME}/${S3_PREFIX}/jobs_fact/"
-          MODEL_PATH="s3a://${S3_BUCKET_NAME}/models/salary_prediction_model"
-
-          echo "🔹 MODE = $RUN_MODE"
-          echo "🔹 INPUT = $INPUT_PATH"
-          echo "🔹 MODEL = $MODEL_PATH"
-
-          python main.py \
-            --mode "$RUN_MODE" \
-            --input-path "$INPUT_PATH" \
-            --model-path "$MODEL_PATH" \
+        
+          export S3_BUCKET_NAME="${S3_BUCKET_NAME}"
+          export S3_PREFIX="${S3_PREFIX:-processed}"
+          export AWS_REGION="${AWS_REGION:-}"
+        
+          if [ -z "$S3_BUCKET_NAME" ]; then
+            echo "❌ S3_BUCKET_NAME is EMPTY"
+            exit 1
+          fi
+        
+          S3_PATH="s3a://${S3_BUCKET_NAME}/${S3_PREFIX}/jobs_fact/"
+          MODEL_OUT="s3a://${S3_BUCKET_NAME}/models/salary_prediction_model"
+        
+          echo "✅ Reading parquet from: $S3_PATH"
+          echo "✅ Model output: $MODEL_OUT"
+        
+          python train_model.py \
+            --s3-path "$S3_PATH" \
+            --model-output "$MODEL_OUT" \
             --endpoint "${S3_ENDPOINT:-}" \
             --region "${AWS_REGION:-}"
+
