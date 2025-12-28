@@ -35,8 +35,10 @@ spark = SparkSession.builder \
 print("🚀 Spark Session đã khởi tạo thành công!")
 
 # --- 2. ĐỌC DỮ LIỆU TỪ S3 (SILVER LAYER) ---
+# Đảm bảo prefix có/không dấu slash đều xử lý đúng
+prefix_clean = PREFIX_IN.rstrip('/')
 # Đường dẫn file parquet đầu vào (kết quả từ bước ETL trước)
-input_path = f"s3a://{BUCKET_NAME}/{PREFIX_IN}jobs_fact"
+input_path = f"s3a://{BUCKET_NAME}/{prefix_clean}/jobs_fact"
 print(f"📂 Đang đọc dữ liệu từ: {input_path}")
 
 try:
