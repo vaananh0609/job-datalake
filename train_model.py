@@ -100,7 +100,7 @@ def main():
         hadoop_conf.set("fs.s3a.region", region)
 
     # Detect and normalize S3A timeout values that may be expressed with units
-    # (some environments set values like '60s' which Hadoop's longOption can't parse)
+    # (environments may set values like '60s', '24h' which Hadoop's longOption can't parse)
     candidate_keys = [
         "fs.s3a.connection.timeout",
         "fs.s3a.connection.establish.timeout",
@@ -112,21 +112,33 @@ def main():
         "fs.s3a.idle.connection.timeout",
     ]
 
+    unit_map = {
+        "ms": 1,
+        "s": 1000,
+        "m": 60 * 1000,
+        "h": 60 * 60 * 1000,
+        "d": 24 * 60 * 60 * 1000,
+    }
+
     for key in candidate_keys:
         try:
             val = hadoop_conf.get(key)
-            if val and re.match(r"^\d+s$", val):
-                # convert '60s' -> '60000' (milliseconds)
-                ms = str(int(val[:-1]) * 1000)
+            if not val:
+                continue
+            val = val.strip()
+            # if plain integer string, nothing to do
+            if re.fullmatch(r"\d+", val):
+                continue
+            m = re.fullmatch(r"(\d+)(ms|s|m|h|d)", val, flags=re.IGNORECASE)
+            if m:
+                num = int(m.group(1))
+                unit = m.group(2).lower()
+                ms = str(num * unit_map.get(unit, 1))
                 hadoop_conf.set(key, ms)
                 LOG.info("Normalized %s: %s -> %s", key, val, ms)
-            elif val and re.match(r"^\d+m$", val):
-                # '1m' -> 60000
-                ms = str(int(val[:-1]) * 60 * 1000)
-                hadoop_conf.set(key, ms)
-                LOG.info("Normalized %s: %s -> %s", key, val, ms)
+            else:
+                LOG.debug("S3A config %s has non-numeric value: %s", key, val)
         except Exception:
-            # don't fail startup for diagnostic code
             LOG.debug("Could not normalize key %s", key, exc_info=True)
 
     # ===== READ DATA =====
