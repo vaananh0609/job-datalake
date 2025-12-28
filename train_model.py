@@ -45,7 +45,12 @@ try:
     df = spark.read.parquet(input_path)
     # Chỉ lấy các bản ghi có lương > 0 để train
     df_train_source = df.filter(col("salary_avg") > 0)
-    print(f"📊 Số lượng bản ghi hợp lệ để train: {df_train_source.count()}")
+    count = df_train_source.count()
+    print(f"📊 Số lượng bản ghi hợp lệ để train: {count}")
+    if count == 0:
+        print("⚠️ Không có dữ liệu hợp lệ (salary_avg>0). Dừng job.")
+        spark.stop()
+        sys.exit(0)
 except Exception as e:
     print(f"❌ Lỗi đọc file Parquet: {str(e)}")
     spark.stop()
@@ -54,21 +59,33 @@ except Exception as e:
 # --- 3. XÂY DỰNG PIPELINE MACHINE LEARNING ---
 
 # Bước A: Xử lý dữ liệu Categorical (Biến chữ thành số)
-# setHandleInvalid="skip" để bỏ qua các giá trị mới lạ chưa gặp lúc train
-indexer_loc = StringIndexer(inputCol="location", outputCol="loc_idx", handleInvalid="skip")
-indexer_lvl = StringIndexer(inputCol="level", outputCol="lvl_idx", handleInvalid="skip")
+# Xây pipeline động: chỉ dùng các cột tồn tại trong dataframe
+stages = []
+feature_cols = []
+
+if 'location' in df_train_source.columns:
+    stages.append(StringIndexer(inputCol='location', outputCol='loc_idx', handleInvalid='keep'))
+    feature_cols.append('loc_idx')
+
+if 'level' in df_train_source.columns:
+    stages.append(StringIndexer(inputCol='level', outputCol='lvl_idx', handleInvalid='keep'))
+    feature_cols.append('lvl_idx')
+
+if not feature_cols:
+    print("❌ Không có cột categorical (location/level) để làm feature. Cần ít nhất 1 cột.")
+    spark.stop()
+    sys.exit(1)
 
 # Bước B: Gom các đặc trưng (Features) thành 1 vector
-assembler = VectorAssembler(
-    inputCols=["loc_idx", "lvl_idx"], # Có thể thêm 'experience_years' nếu có
-    outputCol="features"
-)
+assembler = VectorAssembler(inputCols=feature_cols, outputCol='features')
+stages.append(assembler)
 
 # Bước C: Khai báo thuật toán (Random Forest)
-rf = RandomForestRegressor(featuresCol="features", labelCol="salary_avg", numTrees=50)
+rf = RandomForestRegressor(featuresCol='features', labelCol='salary_avg', numTrees=50)
+stages.append(rf)
 
 # Gom tất cả vào 1 Pipeline
-pipeline = Pipeline(stages=[indexer_loc, indexer_lvl, assembler, rf])
+pipeline = Pipeline(stages=stages)
 
 # --- 4. HUẤN LUYỆN & ĐÁNH GIÁ ---
 print("⏳ Đang chia tập dữ liệu Train/Test...")
