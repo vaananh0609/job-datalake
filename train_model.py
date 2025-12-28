@@ -3,6 +3,7 @@ import os
 import re
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import col
+from pyspark.sql import functions as F
 from pyspark.ml import Pipeline
 from pyspark.ml.feature import StringIndexer, OneHotEncoder, VectorAssembler
 from pyspark.ml.regression import RandomForestRegressor
@@ -118,6 +119,13 @@ def main():
         df = sanitize_column_names(df)
     except Exception:
         LOG.exception("Failed sanitizing column names")
+
+    # ===== CLEAN CATEGORICAL VALUES =====
+    cat_candidates = ["location", "city", "location_name", "locationV2.cityName",
+                      "level", "jobLevel", "job_level", "seniority"]
+    present_cat_cols = [c for c in cat_candidates if c in df.columns]
+    for c in present_cat_cols:
+        df = df.withColumn(c, F.when(F.col(c).isNull() | (F.trim(F.col(c)) == ""), F.lit("__MISSING__")).otherwise(F.col(c)))
 
     # ===== SALARY =====
     if "salary_avg" not in df.columns:
