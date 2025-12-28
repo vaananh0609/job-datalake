@@ -70,6 +70,38 @@ def detect_columns(df):
     return loc_col, lvl_col
 
 
+def derive_processed_prefix(prefix: str) -> str:
+    """Derive a processed data prefix from the provided prefix.
+
+    Rules:
+    - If prefix already contains 'processed' (case-insensitive) -> return as-is
+    - If one of the path segments equals 'raw' -> replace that segment with 'processed'
+    - Otherwise append '/processed' to the prefix
+    """
+    if not prefix:
+        return prefix
+
+    lower = prefix.lower()
+    if "processed" in lower:
+        return prefix
+
+    # Split into segments and replace any segment exactly equal to 'raw'
+    parts = prefix.split("/")
+    replaced = False
+    for i, p in enumerate(parts):
+        if p.lower() == "raw":
+            parts[i] = "processed"
+            replaced = True
+            break
+
+    if replaced:
+        return "/".join(parts)
+
+    # No 'raw' segment found; append processed without duplicating slashes
+    prefix = prefix.rstrip("/")
+    return f"{prefix}/processed"
+
+
 # ===============================
 # MAIN
 # ===============================
@@ -84,7 +116,13 @@ def main():
     if not bucket or not prefix:
         raise SystemExit("❌ Missing S3_BUCKET_NAME or S3_PREFIX env")
 
-    read_path = f"s3a://{bucket}/{prefix}/jobs_fact/"
+    # If the repository secret `S3_PREFIX` points to raw data, derive the
+    # processed prefix automatically so training uses processed/jobs_fact.
+    processed_prefix = derive_processed_prefix(prefix)
+    if processed_prefix != prefix:
+        LOG.info("Derived processed prefix from S3_PREFIX: %s -> %s", prefix, processed_prefix)
+
+    read_path = f"s3a://{bucket}/{processed_prefix}/jobs_fact/"
     model_output = f"s3a://{bucket}/models/salary_prediction_model"
 
     print(f"📥 Reading parquet from: {read_path}")
