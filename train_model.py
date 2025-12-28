@@ -1,3 +1,71 @@
+import logging
+import os
+import re
+from pyspark.sql import SparkSession
+from pyspark.sql.functions import col
+from pyspark.ml import Pipeline
+from pyspark.ml.feature import StringIndexer, OneHotEncoder, VectorAssembler
+from pyspark.ml.regression import RandomForestRegressor
+from pyspark.ml.evaluation import RegressionEvaluator
+
+logging.basicConfig(level=logging.INFO)
+LOG = logging.getLogger("train_model")
+
+
+# ===============================
+# SPARK SESSION
+# ===============================
+def build_spark():
+    spark = (
+        SparkSession.builder
+        .appName("SalaryPredictionTraining")
+
+        # ===== AWS S3 SUPPORT =====
+        .config(
+            "spark.jars.packages",
+            "org.apache.hadoop:hadoop-aws:3.3.4"
+        )
+        .config("spark.hadoop.fs.s3a.impl", "org.apache.hadoop.fs.s3a.S3AFileSystem")
+        .config("spark.hadoop.fs.s3a.path.style.access", "true")
+        .config(
+            "spark.hadoop.fs.s3a.aws.credentials.provider",
+            "org.apache.hadoop.fs.s3a.SimpleAWSCredentialsProvider"
+        )
+
+        # ===== 🔥 FIX NumberFormatException: 60s =====
+        .config("spark.hadoop.fs.s3a.connection.timeout", "60000")
+        .config("spark.hadoop.fs.s3a.connection.establish.timeout", "60000")
+        .config("spark.hadoop.fs.s3a.attempts.maximum", "3")
+        .config("spark.hadoop.fs.s3a.retry.limit", "3")
+        .config("spark.hadoop.fs.s3a.retry.interval", "1000")
+        .config("spark.hadoop.fs.s3a.threads.max", "10")
+        .config("spark.hadoop.fs.s3a.connection.maximum", "100")
+        .config("spark.hadoop.fs.s3a.connection.request.timeout", "60000")
+        .config("spark.hadoop.fs.s3a.socket.timeout", "60000")
+        .config("spark.hadoop.fs.s3a.connection.ttl", "0")
+        .config("spark.hadoop.fs.s3a.idle.connection.timeout", "60000")
+
+        # ===== STABILITY =====
+        .config("spark.sql.files.ignoreCorruptFiles", "true")
+        .config("spark.sql.parquet.filterPushdown", "true")
+        .config("spark.sql.hive.metastore.jars", "builtin")
+
+        .getOrCreate()
+    )
+
+    spark.sparkContext.setLogLevel("WARN")
+    return spark
+
+
+# ===============================
+# AUTO DETECT COLUMNS
+# ===============================
+def detect_columns(df):
+    loc_candidates = ["location", "city", "location_name", "locationV2.cityName"]
+    lvl_candidates = ["level", "jobLevel", "job_level", "seniority"]
+
+    loc_col = next((c for c in loc_candidates if c in df.columns), None)
+    lvl_col = next((c for c in lvl_candidates if c in df.columns), None)
 import os
 import logging
 from pyspark.sql import SparkSession
@@ -11,6 +79,9 @@ logging.basicConfig(level=logging.INFO)
 LOG = logging.getLogger("train_model")
 
 
+# ===============================
+# SPARK SESSION
+# ===============================
 def build_spark():
     spark = (
         SparkSession.builder
@@ -26,7 +97,7 @@ def build_spark():
             "org.apache.hadoop.fs.s3a.SimpleAWSCredentialsProvider"
         )
 
-        # numeric milliseconds only
+        # TIMEOUTS: use numeric milliseconds only
         .config("spark.hadoop.fs.s3a.connection.timeout", "60000")
         .config("spark.hadoop.fs.s3a.connection.establish.timeout", "60000")
         .config("spark.hadoop.fs.s3a.socket.timeout", "60000")
@@ -43,6 +114,9 @@ def build_spark():
     return spark
 
 
+# ===============================
+# AUTO DETECT COLUMNS
+# ===============================
 def detect_columns(df):
     loc_candidates = ["location", "city", "location_name", "locationV2.cityName"]
     lvl_candidates = ["level", "jobLevel", "job_level", "seniority"]
@@ -53,6 +127,9 @@ def detect_columns(df):
     return loc_col, lvl_col
 
 
+# ===============================
+# MAIN
+# ===============================
 def main():
     bucket = os.environ.get("S3_BUCKET_NAME")
     prefix = os.environ.get("S3_PREFIX", "processed")
@@ -60,7 +137,7 @@ def main():
     region = os.environ.get("AWS_REGION")
 
     if not bucket:
-        raise SystemExit("❌ S3_BUCKET_NAME missing")
+        raise SystemExit("❌ S3_BUCKET_NAME is missing")
 
     read_path = f"s3a://{bucket}/{prefix}/jobs_fact/"
     model_output = f"s3a://{bucket}/models/salary_prediction_model"
@@ -70,45 +147,54 @@ def main():
 
     spark = build_spark()
 
+    # Apply endpoint / region if needed (MinIO / custom S3)
     hadoop_conf = spark.sparkContext._jsc.hadoopConfiguration()
     if endpoint:
         hadoop_conf.set("fs.s3a.endpoint", endpoint)
     if region:
         hadoop_conf.set("fs.s3a.region", region)
 
+    # ===== READ DATA =====
     df = spark.read.parquet(read_path)
 
+    # ===== SALARY =====
     if "salary_avg" not in df.columns:
-        df = df.withColumn(
-            "salary_avg",
-            (col("salary_min") + col("salary_max")) / 2
-        )
+        if "salary_min" in df.columns and "salary_max" in df.columns:
+            df = df.withColumn(
+                "salary_avg",
+                (col("salary_min") + col("salary_max")) / 2
+            )
+        else:
+            raise SystemExit("❌ salary columns not found")
 
     df = df.filter(col("salary_avg").isNotNull())
 
+    # ===== FEATURES =====
     loc_col, lvl_col = detect_columns(df)
 
-    stages, features = [], []
+    stages = []
+    features = []
 
     if loc_col:
-        stages += [
-            StringIndexer(inputCol=loc_col, outputCol=f"{loc_col}_idx", handleInvalid="skip"),
-            OneHotEncoder(inputCol=f"{loc_col}_idx", outputCol=f"{loc_col}_vec")
-        ]
-        features.append(f"{loc_col}_vec")
+        idx = f"{loc_col}_idx"
+        vec = f"{loc_col}_vec"
+        stages.append(StringIndexer(inputCol=loc_col, outputCol=idx, handleInvalid="skip"))
+        stages.append(OneHotEncoder(inputCol=idx, outputCol=vec))
+        features.append(vec)
 
     if lvl_col:
-        stages += [
-            StringIndexer(inputCol=lvl_col, outputCol=f"{lvl_col}_idx", handleInvalid="skip"),
-            OneHotEncoder(inputCol=f"{lvl_col}_idx", outputCol=f"{lvl_col}_vec")
-        ]
-        features.append(f"{lvl_col}_vec")
+        idx = f"{lvl_col}_idx"
+        vec = f"{lvl_col}_vec"
+        stages.append(StringIndexer(inputCol=lvl_col, outputCol=idx, handleInvalid="skip"))
+        stages.append(OneHotEncoder(inputCol=idx, outputCol=vec))
+        features.append(vec)
 
     if not features:
-        raise SystemExit("❌ No features found")
+        raise SystemExit("❌ No categorical features found")
 
-    stages += [
-        VectorAssembler(inputCols=features, outputCol="features"),
+    stages.append(VectorAssembler(inputCols=features, outputCol="features"))
+
+    stages.append(
         RandomForestRegressor(
             labelCol="salary_avg",
             featuresCol="features",
@@ -116,28 +202,35 @@ def main():
             maxDepth=10,
             seed=42
         )
-    ]
+    )
 
     pipeline = Pipeline(stages=stages)
 
+    # ===== TRAIN / TEST =====
     train_df, test_df = df.randomSplit([0.8, 0.2], seed=42)
 
+    LOG.info("📊 Training rows: %d", train_df.count())
     LOG.info("🚀 Training model...")
+
     model = pipeline.fit(train_df)
 
+    # ===== EVALUATE =====
+    preds = model.transform(test_df)
     rmse = RegressionEvaluator(
         labelCol="salary_avg",
         predictionCol="prediction",
         metricName="rmse"
-    ).evaluate(model.transform(test_df))
+    ).evaluate(preds)
 
     LOG.info("📉 RMSE = %.2f", rmse)
 
+    # ===== SAVE =====
     model.write().overwrite().save(model_output)
-    LOG.info("✅ Model saved")
+    LOG.info("✅ Model saved successfully")
 
     spark.stop()
 
 
 if __name__ == "__main__":
     main()
+    train_df, test_df = df.randomSplit([0.8, 0.2], seed=42)
