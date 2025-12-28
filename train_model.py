@@ -18,16 +18,35 @@ def build_spark():
     spark = (
         SparkSession.builder
         .appName("SalaryPredictionTraining")
+
+        # ===== AWS S3 SUPPORT =====
         .config(
             "spark.jars.packages",
             "org.apache.hadoop:hadoop-aws:3.3.4"
         )
         .config("spark.hadoop.fs.s3a.impl", "org.apache.hadoop.fs.s3a.S3AFileSystem")
         .config("spark.hadoop.fs.s3a.path.style.access", "true")
-        .config("spark.hadoop.fs.s3a.aws.credentials.provider",
-                "org.apache.hadoop.fs.s3a.SimpleAWSCredentialsProvider")
+        .config(
+            "spark.hadoop.fs.s3a.aws.credentials.provider",
+            "org.apache.hadoop.fs.s3a.SimpleAWSCredentialsProvider"
+        )
+
+        # ===== 🔥 FIX NumberFormatException: 60s =====
+        .config("spark.hadoop.fs.s3a.connection.timeout", "60000")
+        .config("spark.hadoop.fs.s3a.connection.establish.timeout", "60000")
+        .config("spark.hadoop.fs.s3a.attempts.maximum", "3")
+        .config("spark.hadoop.fs.s3a.retry.limit", "3")
+        .config("spark.hadoop.fs.s3a.retry.interval", "1000")
+        .config("spark.hadoop.fs.s3a.threads.max", "10")
+
+        # ===== STABILITY =====
+        .config("spark.sql.files.ignoreCorruptFiles", "true")
+        .config("spark.sql.parquet.filterPushdown", "true")
+        .config("spark.sql.hive.metastore.jars", "builtin")
+
         .getOrCreate()
     )
+
     spark.sparkContext.setLogLevel("WARN")
     return spark
 
