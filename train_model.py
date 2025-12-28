@@ -1,13 +1,9 @@
-import logging
-import os
-import re
-from pyspark.sql import SparkSession
 import os
 import sys
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import col
 from pyspark.ml import Pipeline
-from pyspark.ml.feature import StringIndexer, VectorAssembler, Imputer
+from pyspark.ml.feature import StringIndexer, VectorAssembler
 from pyspark.ml.regression import RandomForestRegressor
 from pyspark.ml.evaluation import RegressionEvaluator
 
@@ -102,37 +98,3 @@ except Exception as e:
     sys.exit(1)
 
 spark.stop()
-    LOG.info("🚀 Training model...")
-
-    try:
-        model = pipeline.fit(train_df)
-    except Exception as exc:
-        LOG.exception("Model training failed: %s", exc)
-        try:
-            LOG.error("Dataframe columns: %s", df.columns)
-            LOG.error("Dataframe schema: %s", df.schema.simpleString())
-            LOG.error("Training sample (5 rows):")
-            train_df.show(5, truncate=False)
-        except Exception:
-            LOG.exception("Failed to log dataframe sample")
-        raise SystemExit("❌ Training failed — see logs for dataframe schema and sample")
-
-    # ===== EVALUATE =====
-    preds = model.transform(test_df)
-    rmse = RegressionEvaluator(
-        labelCol="salary_avg",
-        predictionCol="prediction",
-        metricName="rmse"
-    ).evaluate(preds)
-
-    LOG.info("📉 RMSE = %.2f", rmse)
-
-    # ===== SAVE =====
-    model.write().overwrite().save(model_output)
-    LOG.info("✅ Model saved successfully")
-
-    spark.stop()
-
-
-if __name__ == "__main__":
-    main()
