@@ -81,25 +81,26 @@ def derive_processed_prefix(prefix: str) -> str:
     if not prefix:
         return prefix
 
-    lower = prefix.lower()
-    if "processed" in lower:
+    # normalize trimming
+    if not prefix:
         return prefix
 
-    # Split into segments and replace any segment exactly equal to 'raw'
-    parts = prefix.split("/")
-    replaced = False
+    cleaned = prefix.strip("/")
+    parts = cleaned.split("/")
+
+    # If there's an explicit 'processed' segment, keep prefix up to that segment
+    for i, p in enumerate(parts):
+        if p.lower() == "processed":
+            return "/".join(parts[: i + 1])
+
+    # Replace a lone 'raw' segment with 'processed' (e.g., 'raw/vietnamworks' not matched)
     for i, p in enumerate(parts):
         if p.lower() == "raw":
             parts[i] = "processed"
-            replaced = True
-            break
+            return "/".join(parts)
 
-    if replaced:
-        return "/".join(parts)
-
-    # No 'raw' segment found; append processed without duplicating slashes
-    prefix = prefix.rstrip("/")
-    return f"{prefix}/processed"
+    # Default: append 'processed'
+    return f"{cleaned}/processed"
 
 
 # ===============================
