@@ -2,184 +2,106 @@ import logging
 import os
 import re
 from pyspark.sql import SparkSession
+import os
+import sys
+from pyspark.sql import SparkSession
 from pyspark.sql.functions import col
-from pyspark.sql import functions as F
 from pyspark.ml import Pipeline
-from pyspark.ml.feature import StringIndexer, OneHotEncoder, VectorAssembler
+from pyspark.ml.feature import StringIndexer, VectorAssembler, Imputer
 from pyspark.ml.regression import RandomForestRegressor
 from pyspark.ml.evaluation import RegressionEvaluator
 
-logging.basicConfig(level=logging.INFO)
-LOG = logging.getLogger("train_model")
+# --- 1. CẤU HÌNH MÔI TRƯỜNG & KẾT NỐI SPARK ---
+# Lấy biến môi trường từ GitHub Actions workflow
+AWS_ACCESS_KEY = os.getenv("AWS_ACCESS_KEY_ID")
+AWS_SECRET_KEY = os.getenv("AWS_SECRET_ACCESS_KEY")
+AWS_REGION = os.getenv("AWS_REGION")
+S3_ENDPOINT = os.getenv("S3_ENDPOINT", "https://s3.amazonaws.com")
+BUCKET_NAME = os.getenv("S3_BUCKET_NAME")
+# Prefix đầu vào (ví dụ: processed/)
+PREFIX_IN = os.getenv("S3_PREFIX", "processed/")
 
+if not all([AWS_ACCESS_KEY, AWS_SECRET_KEY, BUCKET_NAME]):
+    print("❌ LỖI: Thiếu biến môi trường AWS/S3. Kiểm tra lại GitHub Secrets.")
+    sys.exit(1)
 
-# ===============================
-# SPARK SESSION
-# ===============================
-def build_spark():
-    spark = (
-        SparkSession.builder
-        .appName("SalaryPredictionTraining")
-        .config(
-            "spark.jars.packages",
-            "org.apache.hadoop:hadoop-aws:3.3.4"
-        )
-        .config("spark.hadoop.fs.s3a.impl", "org.apache.hadoop.fs.s3a.S3AFileSystem")
-        .config("spark.hadoop.fs.s3a.path.style.access", "true")
-        .config(
-            "spark.hadoop.fs.s3a.aws.credentials.provider",
-            "org.apache.hadoop.fs.s3a.SimpleAWSCredentialsProvider"
-        )
+# Khởi tạo Spark Session với cấu hình S3A
+spark = SparkSession.builder \
+    .appName("TrainSalaryModel_CI") \
+    .config("spark.jars.packages", "org.apache.hadoop:hadoop-aws:3.3.4") \
+    .config("spark.hadoop.fs.s3a.access.key", AWS_ACCESS_KEY) \
+    .config("spark.hadoop.fs.s3a.secret.key", AWS_SECRET_KEY) \
+    .config("spark.hadoop.fs.s3a.endpoint", S3_ENDPOINT) \
+    .config("spark.hadoop.fs.s3a.impl", "org.apache.hadoop.fs.s3a.S3AFileSystem") \
+    .config("spark.hadoop.fs.s3a.path.style.access", "true") \
+    .getOrCreate()
 
-        # TIMEOUTS: numeric milliseconds only
-        .config("spark.hadoop.fs.s3a.connection.timeout", "60000")
-        .config("spark.hadoop.fs.s3a.connection.establish.timeout", "60000")
-        .config("spark.hadoop.fs.s3a.socket.timeout", "60000")
-        .config("spark.hadoop.fs.s3a.connection.request.timeout", "60000")
-        .config("spark.hadoop.fs.s3a.idle.connection.timeout", "60000")
-        .config("spark.hadoop.fs.s3a.attempts.maximum", "3")
+print("🚀 Spark Session đã khởi tạo thành công!")
 
-        .config("spark.sql.files.ignoreCorruptFiles", "true")
-        .config("spark.sql.hive.metastore.jars", "builtin")
-        .getOrCreate()
-    )
+# --- 2. ĐỌC DỮ LIỆU TỪ S3 (SILVER LAYER) ---
+# Đường dẫn file parquet đầu vào (kết quả từ bước ETL trước)
+input_path = f"s3a://{BUCKET_NAME}/{PREFIX_IN}jobs_fact"
+print(f"📂 Đang đọc dữ liệu từ: {input_path}")
 
-    spark.sparkContext.setLogLevel("WARN")
-    return spark
+try:
+    df = spark.read.parquet(input_path)
+    # Chỉ lấy các bản ghi có lương > 0 để train
+    df_train_source = df.filter(col("salary_avg") > 0)
+    print(f"📊 Số lượng bản ghi hợp lệ để train: {df_train_source.count()}")
+except Exception as e:
+    print(f"❌ Lỗi đọc file Parquet: {str(e)}")
+    spark.stop()
+    sys.exit(1)
 
+# --- 3. XÂY DỰNG PIPELINE MACHINE LEARNING ---
 
-# ===============================
-# AUTO DETECT COLUMNS
-# ===============================
-def detect_columns(df):
-    loc_candidates = ["location", "city", "location_name", "locationV2.cityName"]
-    lvl_candidates = ["level", "jobLevel", "job_level", "seniority"]
+# Bước A: Xử lý dữ liệu Categorical (Biến chữ thành số)
+# setHandleInvalid="skip" để bỏ qua các giá trị mới lạ chưa gặp lúc train
+indexer_loc = StringIndexer(inputCol="location", outputCol="loc_idx", handleInvalid="skip")
+indexer_lvl = StringIndexer(inputCol="level", outputCol="lvl_idx", handleInvalid="skip")
 
-    loc_col = next((c for c in loc_candidates if c in df.columns), None)
-    lvl_col = next((c for c in lvl_candidates if c in df.columns), None)
+# Bước B: Gom các đặc trưng (Features) thành 1 vector
+assembler = VectorAssembler(
+    inputCols=["loc_idx", "lvl_idx"], # Có thể thêm 'experience_years' nếu có
+    outputCol="features"
+)
 
-    return loc_col, lvl_col
+# Bước C: Khai báo thuật toán (Random Forest)
+rf = RandomForestRegressor(featuresCol="features", labelCol="salary_avg", numTrees=50)
 
+# Gom tất cả vào 1 Pipeline
+pipeline = Pipeline(stages=[indexer_loc, indexer_lvl, assembler, rf])
 
-# ===============================
-# MAIN
-# ===============================
-def main():
-    bucket = os.environ.get("S3_BUCKET_NAME")
-    prefix = os.environ.get("S3_PREFIX", "processed")
-    endpoint = os.environ.get("S3_ENDPOINT")
-    region = os.environ.get("AWS_REGION")
+# --- 4. HUẤN LUYỆN & ĐÁNH GIÁ ---
+print("⏳ Đang chia tập dữ liệu Train/Test...")
+train_data, test_data = df_train_source.randomSplit([0.8, 0.2], seed=42)
 
-    if not bucket:
-        raise SystemExit("❌ S3_BUCKET_NAME is missing")
+print("🏋️‍♂️ Bắt đầu Training...")
+model = pipeline.fit(train_data)
 
-    read_path = f"s3a://{bucket}/{prefix}/jobs_fact/"
-    model_output = f"s3a://{bucket}/models/salary_prediction_model"
+print("mag  Đang Evaluate trên tập Test...")
+predictions = model.transform(test_data)
+evaluator = RegressionEvaluator(labelCol="salary_avg", predictionCol="prediction", metricName="rmse")
+rmse = evaluator.evaluate(predictions)
 
-    LOG.info("📥 Reading parquet from: %s", read_path)
-    LOG.info("💾 Model output: %s", model_output)
+print("="*40)
+print(f"✅ Training Hoàn tất!")
+print(f"📉 Sai số trung bình (RMSE): {rmse:,.2f}")
+print("="*40)
 
-    spark = build_spark()
+# --- 5. LƯU MODEL (MODEL REGISTRY) ---
+# Lưu model ra S3 để Web App (Streamlit/API) có thể tải về dùng
+model_output_path = f"s3a://{BUCKET_NAME}/models/salary_prediction_v1"
+print(f"💾 Đang lưu model vào: {model_output_path}")
 
-    # Apply endpoint / region if needed (MinIO / custom S3)
-    hadoop_conf = spark.sparkContext._jsc.hadoopConfiguration()
-    if endpoint:
-        hadoop_conf.set("fs.s3a.endpoint", endpoint)
-    if region:
-        hadoop_conf.set("fs.s3a.region", region)
+try:
+    model.write().overwrite().save(model_output_path)
+    print("✅ Lưu Model thành công!")
+except Exception as e:
+    print(f"❌ Lỗi khi lưu model: {str(e)}")
+    sys.exit(1)
 
-    # ===== READ DATA =====
-    df = spark.read.parquet(read_path)
-
-    # ===== SANITIZE COLUMN NAMES =====
-    def sanitize_column_names(df):
-        cols = df.columns
-        mapping = []
-        for c in cols:
-            new = c.strip() if c is not None else ""
-            if new == "":
-                mapping.append((c, None))
-                continue
-            # replace chars not allowed in identifiers with underscore
-            safe = re.sub(r"[^0-9A-Za-z_]+", "_", new)
-            if safe != c:
-                mapping.append((c, safe))
-
-        # Drop empty-name columns
-        for old, new in mapping:
-            if new is None:
-                LOG.warning("Dropping column with empty name: %r", old)
-                df = df.drop(old)
-            else:
-                LOG.info("Rename column: %s -> %s", old, new)
-                df = df.withColumnRenamed(old, new)
-        return df
-
-    try:
-        df = sanitize_column_names(df)
-    except Exception:
-        LOG.exception("Failed sanitizing column names")
-
-    # ===== CLEAN CATEGORICAL VALUES =====
-    cat_candidates = ["location", "city", "location_name", "locationV2.cityName",
-                      "level", "jobLevel", "job_level", "seniority"]
-    present_cat_cols = [c for c in cat_candidates if c in df.columns]
-    for c in present_cat_cols:
-        df = df.withColumn(c, F.when(F.col(c).isNull() | (F.trim(F.col(c)) == ""), F.lit("__MISSING__")).otherwise(F.col(c)))
-
-    # ===== SALARY =====
-    if "salary_avg" not in df.columns:
-        if "salary_min" in df.columns and "salary_max" in df.columns:
-            df = df.withColumn(
-                "salary_avg",
-                (col("salary_min") + col("salary_max")) / 2
-            )
-        else:
-            raise SystemExit("❌ salary columns not found")
-
-    df = df.filter(col("salary_avg").isNotNull())
-
-    # ===== FEATURES =====
-    loc_col, lvl_col = detect_columns(df)
-
-    stages = []
-    features = []
-
-    if loc_col:
-        idx = f"{loc_col}_idx"
-        vec = f"{loc_col}_vec"
-        stages.append(StringIndexer(inputCol=loc_col, outputCol=idx, handleInvalid="skip"))
-        stages.append(OneHotEncoder(inputCol=idx, outputCol=vec))
-        features.append(vec)
-
-    if lvl_col:
-        idx = f"{lvl_col}_idx"
-        vec = f"{lvl_col}_vec"
-        stages.append(StringIndexer(inputCol=lvl_col, outputCol=idx, handleInvalid="skip"))
-        stages.append(OneHotEncoder(inputCol=idx, outputCol=vec))
-        features.append(vec)
-
-    if not features:
-        raise SystemExit("❌ No categorical features found")
-
-    stages.append(VectorAssembler(inputCols=features, outputCol="features"))
-
-    stages.append(
-        RandomForestRegressor(
-            labelCol="salary_avg",
-            featuresCol="features",
-            numTrees=50,
-            maxDepth=10,
-            seed=42
-        )
-    )
-
-    pipeline = Pipeline(stages=stages)
-
-    # ===== TRAIN / TEST =====
-    train_df, test_df = df.randomSplit([0.8, 0.2], seed=42)
-
-    LOG.info("📊 Training rows: %d", train_df.count())
+spark.stop()
     LOG.info("🚀 Training model...")
 
     try:

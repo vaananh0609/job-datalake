@@ -5,5 +5,6 @@ playwright
 oci
 python-dotenv
 boto3
-pyspark==3.5.1
-numpy>=1.23
+pyspark==3.5.0
+numpy
+pandas
