@@ -6,3 +6,4 @@ oci
 python-dotenv
 boto3
 pyspark
+numpy>=1.23
