@@ -132,6 +132,7 @@ def main():
     parser.add_argument("--path-style-access", action="store_true")
     parser.add_argument("--region", default=os.environ.get("AWS_REGION"))
     parser.add_argument("--write-output", action="store_true")
+    parser.add_argument("--write-sidecar", action="store_true", help="Also write small CSV sidecar samples for quick inspection")
     parser.add_argument("--out-prefix", default="processed")
     args = parser.parse_args()
 
@@ -230,6 +231,20 @@ def main():
 
         print(f"📝 Write job_skills -> {skills_path}")
         df_skills.write.mode("overwrite").option("compression", "snappy").parquet(skills_path)
+
+        # Optional: write small CSV sidecars for quick manual inspection (single file)
+        if args.write_sidecar:
+            try:
+                jobs_sidecar = f"s3a://{bucket}/{out_prefix}/jobs_fact_sample/"
+                skills_sidecar = f"s3a://{bucket}/{out_prefix}/job_skills_sample/"
+                print(f"📝 Write CSV sidecar (jobs) -> {jobs_sidecar}")
+                # coalesce to single file to make download/inspection easy
+                df_jobs.limit(200).coalesce(1).write.mode("overwrite").option("header", "true").csv(jobs_sidecar)
+
+                print(f"📝 Write CSV sidecar (skills) -> {skills_sidecar}")
+                df_skills.limit(200).coalesce(1).write.mode("overwrite").option("header", "true").csv(skills_sidecar)
+            except Exception:
+                LOG.exception("Failed to write CSV sidecars")
 
         print("✅ WRITE SUCCESS")
 
