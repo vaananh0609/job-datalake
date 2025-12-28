@@ -72,6 +72,20 @@ def main():
     bucket = os.environ.get("S3_BUCKET_NAME")
     prefix = os.environ.get("S3_PREFIX")
 
+            # Ensure S3A numeric timeouts/settings are explicitly set (milliseconds)
+            .config("spark.hadoop.fs.s3a.connection.timeout", "60000")
+            .config("spark.hadoop.fs.s3a.connection.establish.timeout", "60000")
+            .config("spark.hadoop.fs.s3a.threads.keepalivetime", "60000")
+            .config("spark.hadoop.fs.s3a.multipart.purge", "false")
+            .config("spark.hadoop.fs.s3a.multipart.purge.age", "86400000")
+            .config("spark.hadoop.fs.s3a.connection.maximum", "100")
+            .config("spark.hadoop.fs.s3a.threads.max", "50")
+            .config("spark.hadoop.fs.s3a.retry.limit", "3")
+            .config(
+                "spark.hadoop.fs.s3a.aws.credentials.provider",
+                "org.apache.hadoop.fs.s3a.SimpleAWSCredentialsProvider",
+            )
+
     if not bucket or not prefix:
         raise SystemExit("❌ Missing S3_BUCKET_NAME or S3_PREFIX env")
 
